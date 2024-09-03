@@ -14,9 +14,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -24,19 +23,32 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <GridSplitter Background="Gray" Grid.Column="1" Grid.Row="3" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
-        <GridSplitter Background="Gray" Grid.ColumnSpan="3" Grid.Row="4" Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <GridSplitter Background="Gray" Grid.Column="1" Grid.Row="2" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+        <GridSplitter Background="Gray" Grid.ColumnSpan="3" Grid.Row="3" Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
         <Menu Grid.ColumnSpan="3" Grid.Row="0">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Новый проект"/>
+                <MenuItem Header="Открыть проект"/>
+                <MenuItem Header="Сохранить"/>
+                <MenuItem Header="Сохранить как"/>
+                <Separator/>
+                <MenuItem Header="Выход"/>
+            </MenuItem>
         </Menu>
-        <ToolBar Grid.ColumnSpan="3" Grid.Row="1">
-        </ToolBar>
-        <StatusBar Grid.ColumnSpan="3" Grid.Row="7">
+
+        <Grid Background="Gray" Grid.ColumnSpan="3" Grid.Row="1">
+            <ToolBar Background="Gray">
+            </ToolBar>
+        </Grid>
+        
+        <StatusBar Background="Gray" Grid.ColumnSpan="3" Grid.Row="6">
+            <TextBlock Foreground="White" Text="Статус"/>
         </StatusBar>
 
-        <Frame x:Name="Frame1" Grid.Column="0" Grid.Row="3" Content="{Binding PageFrame1}"/>
-        <Frame x:Name="Frame2" Grid.Column="2" Grid.Row="3" Content="{Binding PageFrame2}"/>
-        <Frame x:Name="Frame3" Grid.ColumnSpan="3" Grid.Row="5" Content="{Binding PageFrame3}"/>
+        <Frame x:Name="Frame1" Grid.Column="0" Grid.Row="2" Content="{Binding PageFrame1}"/>
+        <Frame x:Name="Frame2" Grid.Column="2" Grid.Row="2" Content="{Binding PageFrame2}"/>
+        <Frame x:Name="Frame3" Grid.ColumnSpan="3" Grid.Row="4" Content="{Binding PageFrame3}"/>
     </Grid>
 
 </Window>
