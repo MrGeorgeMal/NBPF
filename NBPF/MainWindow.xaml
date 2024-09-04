@@ -35,6 +35,33 @@
                 <Separator/>
                 <MenuItem Header="Выход"/>
             </MenuItem>
+            
+            <MenuItem Header="Правка">
+                <MenuItem Header="Отменить"/>
+                <MenuItem Header="Вернуть"/>
+            </MenuItem>
+
+            <MenuItem Header="Инструменты">
+                <MenuItem Header="Запустить анализ"/>
+                <MenuItem Header="Запустить синтез"/>
+            </MenuItem>
+            
+            <MenuItem Header="Графики">
+                <MenuItem Header="Расположение графиков"/>
+                <MenuItem Header="Добавить страницу графиков"/>
+            </MenuItem>
+            
+            <MenuItem Header="Окно">
+                <MenuItem Header="Рабочая область справа"/>
+                <MenuItem Header="Рабочая область слева"/>
+            </MenuItem>
+
+            <MenuItem Header="Справка">
+                <MenuItem Header="Cookbook"/>
+                <MenuItem Header="Справка"/>
+                <Separator/>
+                <MenuItem Header="О программе"/>
+            </MenuItem>
         </Menu>
 
         <Grid Background="Gray" Grid.ColumnSpan="3" Grid.Row="1">

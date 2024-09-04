@@ -23,6 +23,22 @@ namespace NBPF.Pages
         public Page_InitData()
         {
             InitializeComponent();
+            f0.Description.Text = "Центральная частота f0";
+            df.Description.Text = "Погрешность синтеза \u0394f";
+            Bandwidth.Description.Text = "Ширина полосы пропускания";
+            StripStructure.Description.Text = "Полосковая структура";
+            FilterStructure.Description.Text = "Структура фильтра";
+
+            StripStructure.SelectBox.Items.Add("Пользовательский");
+            StripStructure.SelectBox.Items.Add("Полосковая линия");
+            StripStructure.SelectBox.Items.Add("Связанные полосковые линии");
+            StripStructure.SelectBox.Items.Add("Связанные полосковые линии с вертикальной подложкой");
+
+            FilterStructure.SelectBox.Items.Add("Пользовательский");
+            FilterStructure.SelectBox.Items.Add("PRLC");
+            FilterStructure.SelectBox.Items.Add("SRLC");
+            FilterStructure.SelectBox.Items.Add("SR PLC");
+            FilterStructure.SelectBox.Items.Add("PR SLC");
         }
     }
 }
