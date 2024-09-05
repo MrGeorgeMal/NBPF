@@ -9,7 +9,9 @@
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.4*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -19,14 +21,14 @@
             <RowDefinition Height="3*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <GridSplitter Background="Gray" Grid.Column="1" Grid.Row="2" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
-        <GridSplitter Background="Gray" Grid.ColumnSpan="3" Grid.Row="3" Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <GridSplitter Background="Gray" Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+        <GridSplitter Background="Gray" Grid.Column="3" Grid.RowSpan="5" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+        <GridSplitter Background="Gray" Grid.Column="0"  Grid.Row="3" Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
-        <Menu Grid.ColumnSpan="3" Grid.Row="0">
+        <Menu Grid.ColumnSpan="5" Grid.Row="0">
             <MenuItem Header="Файл">
                 <MenuItem Header="Новый проект"/>
                 <MenuItem Header="Открыть проект"/>
@@ -45,17 +47,7 @@
                 <MenuItem Header="Запустить анализ"/>
                 <MenuItem Header="Запустить синтез"/>
             </MenuItem>
-            
-            <MenuItem Header="Графики">
-                <MenuItem Header="Расположение графиков"/>
-                <MenuItem Header="Добавить страницу графиков"/>
-            </MenuItem>
-            
-            <MenuItem Header="Окно">
-                <MenuItem Header="Рабочая область справа"/>
-                <MenuItem Header="Рабочая область слева"/>
-            </MenuItem>
-
+                        
             <MenuItem Header="Справка">
                 <MenuItem Header="Cookbook"/>
                 <MenuItem Header="Справка"/>
@@ -64,18 +56,19 @@
             </MenuItem>
         </Menu>
 
-        <Grid Background="Gray" Grid.ColumnSpan="3" Grid.Row="1">
+        <Grid Background="Gray" Grid.ColumnSpan="5" Grid.Row="1">
             <ToolBar Background="Gray">
             </ToolBar>
         </Grid>
         
-        <StatusBar Background="Gray" Grid.ColumnSpan="3" Grid.Row="6">
+        <StatusBar Background="Gray" Grid.ColumnSpan="5" Grid.Row="5">
             <TextBlock Foreground="White" Text="Статус"/>
         </StatusBar>
 
-        <Frame x:Name="Frame1" Grid.Column="0" Grid.Row="2" Content="{Binding PageFrame1}" Margin="5"/>
-        <Frame x:Name="Frame2" Grid.Column="2" Grid.Row="2" Content="{Binding PageFrame2}"/>
-        <Frame x:Name="Frame3" Grid.ColumnSpan="3" Grid.Row="4" Content="{Binding PageFrame3}"/>
+        <Frame x:Name="Frame1" Grid.Column="0" Grid.Row="2" Content="{Binding PageFrame1}"/>
+        <Frame x:Name="Frame2" Grid.Column="2" Grid.Row="2" Grid.RowSpan="3" Content="{Binding PageFrame2}"/>
+        <Frame x:Name="Frame3" Grid.Column="4" Grid.Row="2" Grid.RowSpan="3" Content="{Binding PageFrame3}"/>
+        <Frame x:Name="Frame4" Grid.Column="0"  Grid.Row="4" Content="{Binding PageFrame4}"/>
     </Grid>
 
 </Window>

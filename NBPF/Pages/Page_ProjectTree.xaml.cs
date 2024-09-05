@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace NBPF.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Page_Chart.xaml
+    /// Логика взаимодействия для Page_ProjectTree.xaml
     /// </summary>
-    public partial class Page_Chart : Page
+    public partial class Page_ProjectTree : Page
     {
-        public Page_Chart()
+        public Page_ProjectTree()
         {
             InitializeComponent();
         }
