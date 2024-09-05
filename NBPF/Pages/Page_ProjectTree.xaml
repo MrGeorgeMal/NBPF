@@ -8,20 +8,9 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Page_ProjectTree">
 
-    <Grid Background="Beige">
-        <TreeView>
-            <TreeViewItem Header="Проект" IsExpanded="True">
-                <TreeViewItem Header="Анализ"/>
-                <TreeViewItem Header="Синтез"/>
-                <TreeViewItem Header="Структура распределенной цепи"/>
-                <TreeViewItem Header="Структура фильтра"/>
-                <TreeViewItem Header="Графики" IsExpanded="True">
-                    <TreeViewItem Header="График 1"/>
-                </TreeViewItem>
-                <TreeViewItem Header="Страницы просмотра" IsExpanded="True">
-                    <TreeViewItem Header="Страница 1"/>
-                </TreeViewItem>
-            </TreeViewItem>
+    <Grid>
+        <TreeView x:Name="projectTree">
+
         </TreeView>
     </Grid>
 </Page>

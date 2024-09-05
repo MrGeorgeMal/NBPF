@@ -1,4 +1,5 @@
-﻿using NBPF.Pages;
+﻿using NBPF.NBPFClasses;
+using NBPF.Pages;
 using System.Windows.Controls;
 
 namespace NBPF.ViewModels
@@ -10,9 +11,14 @@ namespace NBPF.ViewModels
         public Page PageFrame3 { get; set; } = new Pages.Page_Properties();
         public Page PageFrame4 { get; set; } = new Pages.Page_OutputData();
 
+
+        public Project project;
+        public List<NBPFObject> nbpf_objects { get; set; } = new List<NBPFObject>();
+
+
         public ViewModel_ContentManager()
         {
-
+            project = new Project(nbpf_objects);
         }
     }
 }

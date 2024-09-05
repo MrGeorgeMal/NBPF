@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NBPF.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,12 @@ namespace NBPF.Pages
         public Page_ProjectTree()
         {
             InitializeComponent();
+        }
+
+        public int UpdateProjectTree()
+        {
+
+            return 0;
         }
     }
 }
