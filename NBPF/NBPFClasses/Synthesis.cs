@@ -8,7 +8,7 @@ namespace NBPF.NBPFClasses
 {
     public class Synthesis : NBPFObject
     {
-
-        public Synthesis(List<NBPFObject> objects) : base(objects) { }
+        public Synthesis() { }
+        public Synthesis(string name) : base(name) { }
     }
 }

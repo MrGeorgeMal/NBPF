@@ -8,7 +8,7 @@ namespace NBPF.NBPFClasses
 {
     public class Analysis : NBPFObject
     {
-
-        public Analysis(List<NBPFObject> objects) : base(objects) { }
+        public Analysis() { }
+        public Analysis(string name) : base(name) { }
     }
 }

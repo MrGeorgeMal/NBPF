@@ -8,7 +8,7 @@ namespace NBPF.NBPFClasses
 {
     public class FilterStructure : NBPFObject
     {
-
-        public FilterStructure(List<NBPFObject> objects) : base(objects) { }
+        public FilterStructure() { }
+        public FilterStructure(string name) : base(name) { }
     }
 }

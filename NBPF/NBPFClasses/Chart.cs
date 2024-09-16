@@ -8,7 +8,7 @@ namespace NBPF.NBPFClasses
 {
     public class Chart : NBPFObject
     {
-
-        public Chart(List<NBPFObject> objects) : base(objects) { }
+        public Chart() { }
+        public Chart(string name) : base(name) { }
     }
 }

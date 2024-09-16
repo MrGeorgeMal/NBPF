@@ -10,6 +10,13 @@ namespace NBPF.NBPFClasses
     {
         public string Name { get; set; } = "Object";
 
+        public NBPFObject() { }
+
+        public NBPFObject(string name)
+        {
+            Name = name;
+        }
+
         public NBPFObject(List<NBPFObject> objects)
         {
             CheckName(Name, objects);

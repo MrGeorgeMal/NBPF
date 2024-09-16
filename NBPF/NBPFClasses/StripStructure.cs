@@ -8,7 +8,7 @@ namespace NBPF.NBPFClasses
 {
     public class StripStructure : NBPFObject
     {
-
-        public StripStructure(List<NBPFObject> objects) : base(objects) { }
+        public StripStructure() { }
+        public StripStructure(string name) : base(name) { }
     }
 }
