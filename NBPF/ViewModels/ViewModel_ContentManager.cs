@@ -39,17 +39,20 @@ namespace NBPF.ViewModels
 
             foreach (NBPFObject obj in project.nbpf_objects)
             {
-                if (obj is Chart)
+                if (obj is not Project)
                 {
-                    TreeViewItem newChart = new TreeViewItem();
-                    newChart.Header = obj.Name;
-                    chartsHeader.Items.Add(newChart);
-                }
-                else
-                {
-                    TreeViewItem newItem = new TreeViewItem();
-                    newItem.Header = obj.Name;
-                    projectHeader.Items.Add(newItem);
+                    if (obj is Chart)
+                    {
+                        TreeViewItem newChart = new TreeViewItem();
+                        newChart.Header = obj.Name;
+                        chartsHeader.Items.Add(newChart);
+                    }
+                    else
+                    {
+                        TreeViewItem newItem = new TreeViewItem();
+                        newItem.Header = obj.Name;
+                        projectHeader.Items.Add(newItem);
+                    }
                 }
             }
             PageFrame1.projectTree.SelectedItemChanged += ProjectTreeItem_Selected;
@@ -65,7 +68,26 @@ namespace NBPF.ViewModels
             PageFrame3.PropertyGrid.Children.Clear();
             PageFrame3.PropertyGrid.RowDefinitions.Clear();
 
+            NBPFObject selectedItem = null;
 
+            foreach (NBPFObject obj in project.nbpf_objects)
+            {
+                if(item.Header.ToString() == obj.Name)
+                {
+                    selectedItem = obj;
+                    break;
+                }
+            }
+
+            if (selectedItem != null)
+            {
+                for (int i = 0; i < selectedItem.userControls.Count; i++)
+                {
+                    PageFrame3.PropertyGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(35) });
+                    Grid.SetRow(selectedItem.userControls[i], i);
+                    PageFrame3.PropertyGrid.Children.Add(selectedItem.userControls[i]);
+                }
+            }
         }
     }
 }

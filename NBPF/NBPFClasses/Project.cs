@@ -21,6 +21,8 @@ namespace NBPF.NBPFClasses
         public UC_InputBox uc_fMin { get; set; } = new UC_InputBox();
         public UC_InputBox uc_fMax { get; set; } = new UC_InputBox();
         public UC_InputBox uc_points { get; set; } = new UC_InputBox();
+        public UC_SelectBox uc_freqUnit { get; set; } = new UC_SelectBox();
+        public UC_SelectBox uc_geomUnit { get; set; } = new UC_SelectBox();
 
         public Project()
         {
@@ -39,15 +41,28 @@ namespace NBPF.NBPFClasses
             nbpf_objects.Add(filterStructure);
             nbpf_objects.Add(chart);
 
-
+            uc_fMin.Description.Text = "Начальная частота анализа";
+            uc_fMax.Description.Text = "Конечная частота анализа";
+            uc_points.Description.Text = "Количество точек анализа";
+            uc_freqUnit.Description.Text = "Единицы измерения частоты";
+            uc_freqUnit.SelectBox.Items.Add("Гц");
+            uc_freqUnit.SelectBox.Items.Add("кГц");
+            uc_freqUnit.SelectBox.Items.Add("МГц");
+            uc_freqUnit.SelectBox.Items.Add("ГГц");
+            uc_freqUnit.SelectBox.SelectedIndex = 0;
+            uc_geomUnit.Description.Text = "Единицы измерения геометрических размеров";
+            uc_geomUnit.SelectBox.Items.Add("м");
+            uc_geomUnit.SelectBox.Items.Add("дм");
+            uc_geomUnit.SelectBox.Items.Add("см");
+            uc_geomUnit.SelectBox.Items.Add("мм");
+            uc_geomUnit.SelectBox.Items.Add("мкм");
+            uc_geomUnit.SelectBox.Items.Add("нм");
+            uc_geomUnit.SelectBox.SelectedIndex = 0;
             userControls.Add(uc_fMin);
             userControls.Add(uc_fMax);
             userControls.Add(uc_points);
-        }
-
-        public Project(List<NBPFObject> nbpf_objects) : base(nbpf_objects)
-        {
-            this.nbpf_objects = nbpf_objects;
+            userControls.Add(uc_freqUnit);
+            userControls.Add(uc_geomUnit);
         }
     }
 }
