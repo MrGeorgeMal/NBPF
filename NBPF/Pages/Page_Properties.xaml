@@ -10,7 +10,7 @@
       Title="Page_Properties">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid>
+        <Grid x:Name="PropertyGrid">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

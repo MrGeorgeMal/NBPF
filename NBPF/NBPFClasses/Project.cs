@@ -21,7 +21,6 @@ namespace NBPF.NBPFClasses
         public UC_InputBox uc_fMin { get; set; } = new UC_InputBox();
         public UC_InputBox uc_fMax { get; set; } = new UC_InputBox();
         public UC_InputBox uc_points { get; set; } = new UC_InputBox();
-        public List<UserControl> userControls { get; set; } = new List<UserControl>();
 
         public Project()
         {

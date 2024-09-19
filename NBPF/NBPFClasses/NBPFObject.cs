@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace NBPF.NBPFClasses
 {
     public class NBPFObject
     {
         public string Name { get; set; } = "Object";
+
+        public List<UserControl> userControls { get; set; } = new List<UserControl>();
 
         public NBPFObject() { }
 

@@ -10,7 +10,7 @@ namespace NBPF.ViewModels
     {
         public Page_ProjectTree PageFrame1 { get; set; } = new Pages.Page_ProjectTree();
         public Page PageFrame2 { get; set; } = new Pages.Page_Workspace();
-        public Page PageFrame3 { get; set; } = new Pages.Page_Properties();
+        public Page_Properties PageFrame3 { get; set; } = new Pages.Page_Properties();
         public Page PageFrame4 { get; set; } = new Pages.Page_OutputData();
 
 
@@ -61,6 +61,11 @@ namespace NBPF.ViewModels
         {
             TreeViewItem item = (TreeViewItem)PageFrame1.projectTree.SelectedItem;
             Debug.WriteLine(item.Header);
+
+            PageFrame3.PropertyGrid.Children.Clear();
+            PageFrame3.PropertyGrid.RowDefinitions.Clear();
+
+
         }
     }
 }
