@@ -9,6 +9,22 @@ namespace NBPF.NBPFClasses
 {
     public class NBPFObject
     {
+        public enum EUnits
+        {
+            pico,
+            nano,
+            micro,
+            milli,
+            centi,
+            deci,
+            deca,
+            hecto,
+            kilo,
+            mega,
+            giga,
+            tera
+        }
+
         public string Name { get; set; } = "Object";
 
         public List<UserControl> userControls { get; set; } = new List<UserControl>();

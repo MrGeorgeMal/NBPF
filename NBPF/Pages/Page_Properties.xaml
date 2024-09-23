@@ -11,23 +11,6 @@
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid x:Name="PropertyGrid">
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="35"/>
-            </Grid.RowDefinitions>
-
-            <TextBlock Text="Исходные данные синтеза" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <usercontrols:UC_InputBox x:Name="f0" Grid.Row="1"/>
-            <usercontrols:UC_InputBox x:Name="Bandwidth" Grid.Row="2"/>
-            <usercontrols:UC_InputBox x:Name="df" Grid.Row="3"/>
-            <usercontrols:UC_SelectBox x:Name="StripStructure" Grid.Row="4"/>
-            <usercontrols:UC_SelectBox x:Name="FilterStructure" Grid.Row="5"/>
-
         </Grid>
     </ScrollViewer>
 </Page>

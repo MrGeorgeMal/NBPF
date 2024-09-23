@@ -63,7 +63,6 @@ namespace NBPF.ViewModels
         public void ProjectTreeItem_Selected(object sender, RoutedEventArgs e)
         {
             TreeViewItem item = (TreeViewItem)PageFrame1.projectTree.SelectedItem;
-            Debug.WriteLine(item.Header);
 
             PageFrame3.PropertyGrid.Children.Clear();
             PageFrame3.PropertyGrid.RowDefinitions.Clear();

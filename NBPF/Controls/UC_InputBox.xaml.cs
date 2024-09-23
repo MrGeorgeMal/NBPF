@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NBPF.Tools;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -21,20 +22,39 @@ namespace NBPF.Controls
     /// </summary>
     public partial class UC_InputBox : UserControl
     {
-        public UC_InputBox()
+        public delegate void ValueChangedHandler(UC_InputBox sender, double value);
+        public event ValueChangedHandler? ValueChanged;
+
+        private string bufferValue;
+        public UC_InputBox(string defaultValue)
         {
             InitializeComponent();
+
             Value.LostFocus += new RoutedEventHandler(TextInputed);
             Value.KeyUp += new KeyEventHandler(EnterPressed);
-            
+            Value.GotFocus += new RoutedEventHandler(TextFocused);
+
+            Value.Text = defaultValue;
+            bufferValue = Value.Text;
+        }
+
+        public void TextFocused(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            bufferValue = textBox.Text;
         }
 
         public void TextInputed(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
-            if(Tools.TextManager.IsNumber(textBox.Text))
+            if (Tools.TextManager.IsNumber(textBox.Text))
             {
-                Debug.WriteLine(Tools.TextManager.ToNumber(textBox.Text));
+                double value = TextManager.ToNumber(textBox.Text);
+                ValueChanged?.Invoke(this, value);
+            }
+            else
+            {
+                textBox.Text = bufferValue;
             }
         }
 
