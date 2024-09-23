@@ -21,6 +21,7 @@ namespace NBPF
         {
             //TEST GIT
             //frfr
+            /// hello
             InitializeComponent();
             this.DataContext = new ViewModels.ViewModel_ContentManager();
         }
