@@ -44,7 +44,7 @@
             </MenuItem>
 
             <MenuItem Header="Инструменты">
-                <MenuItem Header="Запустить анализ"/>
+                <MenuItem Header="Запустить анализ" Click="MenuItem_Click"/>
                 <MenuItem Header="Запустить синтез"/>
             </MenuItem>
                         

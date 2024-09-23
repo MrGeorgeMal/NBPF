@@ -9,7 +9,7 @@ namespace NBPF.ViewModels
     public class ViewModel_ContentManager : ViewModel_Base
     {
         public Page_ProjectTree PageFrame1 { get; set; } = new Pages.Page_ProjectTree();
-        public Page PageFrame2 { get; set; } = new Pages.Page_Workspace();
+        public Pages.Page_Workspace PageFrame2 { get; set; } = new Pages.Page_Workspace();
         public Page_Properties PageFrame3 { get; set; } = new Pages.Page_Properties();
         public Page PageFrame4 { get; set; } = new Pages.Page_OutputData();
 
