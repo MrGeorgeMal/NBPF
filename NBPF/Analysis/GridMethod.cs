@@ -23,6 +23,7 @@ namespace NBPF.Analysis
         public GridMethod(StripStructure strip) 
         {
             this.strip = strip;
+            eps = 1e-4;
         }
         
         public void Calculation(double leftU, double rightU, bool isAir)
@@ -32,10 +33,10 @@ namespace NBPF.Analysis
             field = new List<List<double>>();
             
             // Создание двумерной матрицы, заполненой нулями
-            for (int j = 0; j < J; j++)
+            for (int j = 0; j <= J; j++)
             {
                 field.Add(new List<double>());
-                for (int i = 0; i < I; i++)
+                for (int i = 0; i <= I; i++)
                 {
                     field[j].Add(0);
                 }
@@ -209,13 +210,13 @@ namespace NBPF.Analysis
                     {
                         field[j][T3] = 0.25 * (field[j][T3 - 1] + field[j][T3 + 1] + (2 * e3 / (e3 + e4)) * field[j][T3] + (2 * e4 / (e3 + e4)) * field[j][T3]);
                     }
+                }
 
-                    // message - "проверка на допустимую ошибкой" 
-                    if ( Math.Abs(field[H1+H2+1][T2 - 1] - buffer) < eps)
-                    {
-                        break;
-                    }
-                } 
+                // message - "проверка на допустимую ошибкой" 
+                if (Math.Abs(field[H1 + H2 + 1][T2 - 1] - buffer) < eps)
+                {
+                    break;
+                }
             }
         }
 
