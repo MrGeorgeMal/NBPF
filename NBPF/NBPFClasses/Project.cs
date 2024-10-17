@@ -26,8 +26,8 @@ namespace NBPF.NBPFClasses
         public UC_InputBox uc_fMin;
         public UC_InputBox uc_fMax;
         public UC_InputBox uc_points;
-        public UC_SelectBox uc_freqUnit { get; set; } = new UC_SelectBox();
-        public UC_SelectBox uc_geomUnit { get; set; } = new UC_SelectBox();
+        public UC_SelectBox uc_freqUnit;
+        public UC_SelectBox uc_geomUnit;
 
         public Project()
         {
@@ -49,6 +49,8 @@ namespace NBPF.NBPFClasses
             uc_fMin = new UC_InputBox("1e6");
             uc_fMax = new UC_InputBox("1e10");
             uc_points = new UC_InputBox("1000");
+            uc_freqUnit = new UC_SelectBox("Гц");
+            uc_geomUnit = new UC_SelectBox("м");
             fMin = Tools.TextManager.ToNumber(uc_fMin.Value.Text);
             fMax = Tools.TextManager.ToNumber(uc_fMax.Value.Text);
             points = (int)Tools.TextManager.ToNumber(uc_points.Value.Text);
@@ -58,19 +60,19 @@ namespace NBPF.NBPFClasses
             uc_fMax.Description.Text = "Конечная частота анализа";
             uc_points.Description.Text = "Количество точек анализа";
             uc_freqUnit.Description.Text = "Единицы измерения частоты";
-            uc_freqUnit.SelectBox.Items.Add("Гц");
-            uc_freqUnit.SelectBox.Items.Add("кГц");
-            uc_freqUnit.SelectBox.Items.Add("МГц");
-            uc_freqUnit.SelectBox.Items.Add("ГГц");
-            uc_freqUnit.SelectBox.SelectedIndex = 0;
+            //uc_freqUnit.SelectBox.Items.Add("Гц");
+            //uc_freqUnit.SelectBox.Items.Add("кГц");
+            //uc_freqUnit.SelectBox.Items.Add("МГц");
+            //uc_freqUnit.SelectBox.Items.Add("ГГц");
+            //uc_freqUnit.SelectBox.SelectedIndex = 0;
             uc_geomUnit.Description.Text = "Единицы измерения геометрических размеров";
-            uc_geomUnit.SelectBox.Items.Add("м");
-            uc_geomUnit.SelectBox.Items.Add("дм");
-            uc_geomUnit.SelectBox.Items.Add("см");
-            uc_geomUnit.SelectBox.Items.Add("мм");
-            uc_geomUnit.SelectBox.Items.Add("мкм");
-            uc_geomUnit.SelectBox.Items.Add("нм");
-            uc_geomUnit.SelectBox.SelectedIndex = 0;
+            //uc_geomUnit.SelectBox.Items.Add("м");
+            //uc_geomUnit.SelectBox.Items.Add("дм");
+            //uc_geomUnit.SelectBox.Items.Add("см");
+            //uc_geomUnit.SelectBox.Items.Add("мм");
+            //uc_geomUnit.SelectBox.Items.Add("мкм");
+            //uc_geomUnit.SelectBox.Items.Add("нм");
+            //uc_geomUnit.SelectBox.SelectedIndex = 0;
             userControls.Add(uc_fMin);
             userControls.Add(uc_fMax);
             userControls.Add(uc_points);

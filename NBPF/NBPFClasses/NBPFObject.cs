@@ -9,20 +9,29 @@ namespace NBPF.NBPFClasses
 {
     public class NBPFObject
     {
-        public enum EUnits
+        public enum EUnits : int
         {
             pico,
             nano,
             micro,
             milli,
             centi,
-            deci,
-            deca,
-            hecto,
+            none,
             kilo,
             mega,
             giga,
             tera
+        }
+
+        public enum EDimension
+        {
+            frequancy,
+            length,
+            speed,
+            resistance,
+            conductance,
+            capacitance,
+            inductance
         }
 
         public string Name { get; set; } = "Object";

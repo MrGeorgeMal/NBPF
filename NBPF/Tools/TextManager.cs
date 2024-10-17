@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NBPF.NBPFClasses;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -16,10 +17,34 @@ namespace NBPF.Tools
             return regex.IsMatch(text);
         }
 
+
         public static double ToNumber(string text)
         {
             string bufferText = text.Replace(".", ",");
             return double.Parse(bufferText);
+        }
+
+
+        public static string CreateUnitsString(NBPFObject.EUnits units, NBPFObject.EDimension dimension)
+        {
+            string unitsString = string.Empty;
+            
+            switch(units)
+            {
+                case NBPFObject.EUnits.pico: unitsString = "п"; break;
+                case NBPFObject.EUnits.nano: unitsString = "н"; break;
+                case NBPFObject.EUnits.micro: unitsString = "мк"; break;
+                case NBPFObject.EUnits.milli: unitsString = "м"; break;
+                case NBPFObject.EUnits.centi: unitsString = "с"; break;
+                case NBPFObject.EUnits.none: unitsString = ""; break;
+                case NBPFObject.EUnits.kilo: unitsString = "к"; break;
+                case NBPFObject.EUnits.mega: unitsString = "М"; break;
+                case NBPFObject.EUnits.giga: unitsString = "Г"; break;
+                case NBPFObject.EUnits.tera: unitsString = "Т"; break;
+            }
+            unitsString += dimension;
+
+            return unitsString;
         }
     }
 }
