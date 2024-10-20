@@ -13,7 +13,7 @@ namespace NBPF.NBPFClasses
 {
     public class Project : NBPFObject
     {
-        public ViewModel_ContentManager contentManager;
+        public VM_ContentManager contentManager;
         public List<NBPFObject> nbpf_objects;
 
         public double fMin;

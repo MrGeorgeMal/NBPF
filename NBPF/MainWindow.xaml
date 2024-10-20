@@ -65,10 +65,10 @@
             <TextBlock Foreground="White" Text="Статус"/>
         </StatusBar>
 
-        <Frame x:Name="Frame1" Grid.Column="0" Grid.Row="2" Content="{Binding PageFrame1}"/>
-        <Frame x:Name="Frame2" Grid.Column="2" Grid.Row="2" Grid.RowSpan="3" Content="{Binding PageFrame2}"/>
-        <Frame x:Name="Frame3" Grid.Column="4" Grid.Row="2" Grid.RowSpan="3" Content="{Binding PageFrame3}"/>
-        <Frame x:Name="Frame4" Grid.Column="0"  Grid.Row="4" Content="{Binding PageFrame4}"/>
+        <Frame x:Name="FrameProjectTree" Grid.Column="0" Grid.Row="2" Content="{Binding PageProjectTree}"/>
+        <Frame x:Name="FrameWorkspace" Grid.Column="2" Grid.Row="2" Grid.RowSpan="3" Content="{Binding PageWorkspace}"/>
+        <Frame x:Name="FrameProperties" Grid.Column="4" Grid.Row="2" Grid.RowSpan="3" Content="{Binding PageProperties}"/>
+        <Frame x:Name="FrameOutputData" Grid.Column="0"  Grid.Row="4" Content="{Binding PageOutputData}"/>
     </Grid>
 
 </Window>

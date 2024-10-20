@@ -12,15 +12,12 @@ using System.Windows.Shapes;
 
 namespace NBPF
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.ViewModel_ContentManager();
+            this.DataContext = new ViewModels.VM_ContentManager();
         }
     }
 }

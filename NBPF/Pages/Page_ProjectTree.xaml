@@ -9,7 +9,7 @@
       Title="Page_ProjectTree">
 
     <Grid>
-        <TreeView x:Name="projectTree" x:FieldModifier="public">
+        <TreeView x:Name="ProjectTree">
         </TreeView>
     </Grid>
 </Page>

@@ -2,7 +2,7 @@
 
 namespace NBPF.ViewModels
 {
-    public class ViewModel_Base : INotifyPropertyChanged
+    public class VM_Base : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
         public void OnPropertyChanged(string name)

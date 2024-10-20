@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NBPF.NBPFClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,22 @@ namespace NBPF.Pages
         public Page_Properties()
         {
             InitializeComponent();
+        }
+
+        public void UpdateProperties(NBPFObject item)
+        {
+            PropertyGrid.Children.Clear();
+            PropertyGrid.RowDefinitions.Clear();
+
+            if (item != null)
+            {
+                for (int i = 0; i < item.userControls.Count; i++)
+                {
+                    PropertyGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(35) });
+                    Grid.SetRow(item.userControls[i], i);
+                    PropertyGrid.Children.Add(item.userControls[i]);
+                }
+            }
         }
     }
 }
