@@ -23,8 +23,9 @@ namespace NBPF.Controls
     /// </summary>
     public partial class UC_SelectBox : UserControl
     {
-        NBPFObject.EDimension dimension;
-        NBPFObject.EUnits units;
+        public delegate void ValueChangedHandler(UC_SelectBox sender, NBPFObject.EUnits units);
+        public event ValueChangedHandler? ValueChanged;
+
 
         public UC_SelectBox(NBPFObject.EDimension dimension)
         {
@@ -32,7 +33,28 @@ namespace NBPF.Controls
 
             foreach (NBPFObject.EUnits val in Enum.GetValues(typeof(NBPFObject.EUnits)))
             {
-                SelectBox.Items.Add(TextManager.CreateUnitsString(val, dimension));
+                ComboBoxItem newItem = new ComboBoxItem();
+                newItem.Content = TextManager.CreateUnitsString(val, dimension);
+                newItem.Tag = val;
+
+                switch (dimension)
+                {
+                    case NBPFObject.EDimension.frequancy:
+                        if((int)val >= 5)
+                        {
+                            SelectBox.Items.Add(newItem);
+                        }
+                        break;
+                    case NBPFObject.EDimension.length:
+                        if((int)val <= 5)
+                        {
+                            SelectBox.Items.Add(newItem);
+                        }
+                        break;
+                    default:
+                        SelectBox.Items.Add(newItem);
+                        break;
+                }
             }
 
             SelectBox.SelectedIndex = 0;
@@ -41,7 +63,10 @@ namespace NBPF.Controls
 
         public void SelectBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Debug.WriteLine("SelectChanged");
+            NBPFObject.EUnits units;
+            ComboBoxItem selectedItem = (ComboBoxItem)SelectBox.SelectedItem;
+            units = (NBPFObject.EUnits)selectedItem.Tag;
+            ValueChanged?.Invoke(this, units);
         }
     }
 }

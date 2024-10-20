@@ -42,7 +42,18 @@ namespace NBPF.Tools
                 case NBPFObject.EUnits.giga: unitsString = "Г"; break;
                 case NBPFObject.EUnits.tera: unitsString = "Т"; break;
             }
-            unitsString += dimension;
+            switch(dimension)
+            {
+                case NBPFObject.EDimension.frequancy: unitsString += "Гц"; break;
+                case NBPFObject.EDimension.length: unitsString += "м"; break;
+                case NBPFObject.EDimension.resistance: unitsString += "Ом"; break;
+                case NBPFObject.EDimension.conductance: unitsString += "См"; break;
+                case NBPFObject.EDimension.capacitance: unitsString += "Ф"; break;
+                case NBPFObject.EDimension.inductance: unitsString += "Гн"; break;
+                default:
+                    unitsString += dimension;
+                    break;
+            }
 
             return unitsString;
         }

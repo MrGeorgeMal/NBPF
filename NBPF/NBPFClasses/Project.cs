@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using static NBPF.Controls.UC_InputBox;
 
 namespace NBPF.NBPFClasses
 {
@@ -20,8 +19,8 @@ namespace NBPF.NBPFClasses
         public double fMin;
         public double fMax;
         public int points;
-        public EUnits FrequencyUnits;
-        public EUnits GeometryUnits;
+        public EUnits frequencyUnits = EUnits.none;
+        public EUnits geometryUnits = EUnits.none;
 
         public UC_InputBox uc_fMin;
         public UC_InputBox uc_fMax;
@@ -49,41 +48,35 @@ namespace NBPF.NBPFClasses
             uc_fMin = new UC_InputBox("1e6");
             uc_fMax = new UC_InputBox("1e10");
             uc_points = new UC_InputBox("1000");
-            uc_freqUnit = new UC_SelectBox("Гц");
-            uc_geomUnit = new UC_SelectBox("м");
+            uc_freqUnit = new UC_SelectBox(EDimension.frequancy);
+            uc_geomUnit = new UC_SelectBox(EDimension.length);
             fMin = Tools.TextManager.ToNumber(uc_fMin.Value.Text);
             fMax = Tools.TextManager.ToNumber(uc_fMax.Value.Text);
             points = (int)Tools.TextManager.ToNumber(uc_points.Value.Text);
-
 
             uc_fMin.Description.Text = "Начальная частота анализа";
             uc_fMax.Description.Text = "Конечная частота анализа";
             uc_points.Description.Text = "Количество точек анализа";
             uc_freqUnit.Description.Text = "Единицы измерения частоты";
-            //uc_freqUnit.SelectBox.Items.Add("Гц");
-            //uc_freqUnit.SelectBox.Items.Add("кГц");
-            //uc_freqUnit.SelectBox.Items.Add("МГц");
-            //uc_freqUnit.SelectBox.Items.Add("ГГц");
-            //uc_freqUnit.SelectBox.SelectedIndex = 0;
             uc_geomUnit.Description.Text = "Единицы измерения геометрических размеров";
-            //uc_geomUnit.SelectBox.Items.Add("м");
-            //uc_geomUnit.SelectBox.Items.Add("дм");
-            //uc_geomUnit.SelectBox.Items.Add("см");
-            //uc_geomUnit.SelectBox.Items.Add("мм");
-            //uc_geomUnit.SelectBox.Items.Add("мкм");
-            //uc_geomUnit.SelectBox.Items.Add("нм");
-            //uc_geomUnit.SelectBox.SelectedIndex = 0;
+
             userControls.Add(uc_fMin);
             userControls.Add(uc_fMax);
             userControls.Add(uc_points);
             userControls.Add(uc_freqUnit);
             userControls.Add(uc_geomUnit);
 
-            uc_fMin.ValueChanged += new ValueChangedHandler(SetNewValue);
-            uc_fMax.ValueChanged += new ValueChangedHandler(SetNewValue);
-            uc_points.ValueChanged += new ValueChangedHandler(SetNewValue);
+            uc_fMin.ValueChanged += new UC_InputBox.ValueChangedHandler(SetNewValue);
+            uc_fMax.ValueChanged += new UC_InputBox.ValueChangedHandler(SetNewValue);
+            uc_points.ValueChanged += new UC_InputBox.ValueChangedHandler(SetNewValue);
+            uc_freqUnit.ValueChanged += new UC_SelectBox.ValueChangedHandler(SetNewSelectedItem);
+            uc_geomUnit.ValueChanged += new UC_SelectBox.ValueChangedHandler(SetNewSelectedItem);
         }
 
+        private void Uc_freqUnit_ValueChanged(UC_SelectBox sender, EUnits units)
+        {
+            throw new NotImplementedException();
+        }
 
         public void SetNewValue(UC_InputBox sender, double value)
         {
@@ -94,6 +87,15 @@ namespace NBPF.NBPFClasses
             Debug.WriteLine(fMin);
             Debug.WriteLine(fMax);
             Debug.WriteLine(points);
+        }
+
+        public void SetNewSelectedItem(UC_SelectBox sender, EUnits value)
+        {
+            if (sender == uc_freqUnit) frequencyUnits = value;
+            if (sender == uc_geomUnit) geometryUnits = value;
+            
+            Debug.WriteLine(frequencyUnits);
+            Debug.WriteLine(geometryUnits);
         }
     }
 }

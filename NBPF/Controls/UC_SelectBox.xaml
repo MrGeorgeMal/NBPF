@@ -18,8 +18,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock x:Name="Description" Text="Description" Grid.Column="0" VerticalAlignment="Center"/>
-        <ComboBox x:Name="SelectBox" Text="0" Grid.Column="1" Margin="16, 0, 0, 0" VerticalContentAlignment="Center" HorizontalAlignment="Stretch"/>
-        <Button x:Name="Setup" Content="&#x1F527;" Grid.Column="2" HorizontalAlignment="Right"/>
+        <ComboBox x:Name="SelectBox" Text="0" Grid.Column="1" Margin="10, 0, 0, 0" VerticalContentAlignment="Center" HorizontalAlignment="Stretch"/>
 
     </Grid>
 </UserControl>

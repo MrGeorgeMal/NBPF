@@ -25,6 +25,7 @@ namespace NBPF.NBPFClasses
 
         public enum EDimension
         {
+            custom,
             frequancy,
             length,
             speed,
