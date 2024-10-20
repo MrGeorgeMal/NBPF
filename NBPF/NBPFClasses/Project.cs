@@ -73,11 +73,6 @@ namespace NBPF.NBPFClasses
             uc_geomUnit.ValueChanged += new UC_SelectBox.ValueChangedHandler(SetNewSelectedItem);
         }
 
-        private void Uc_freqUnit_ValueChanged(UC_SelectBox sender, EUnits units)
-        {
-            throw new NotImplementedException();
-        }
-
         public void SetNewValue(UC_InputBox sender, double value)
         {
             if (sender == uc_fMin) fMin = value;
