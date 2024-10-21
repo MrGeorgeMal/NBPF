@@ -18,20 +18,35 @@ using System.Windows.Shapes;
 
 namespace NBPF.Controls
 {
-    /// <summary>
-    /// Interaction logic for UC_SelectBox.xaml
-    /// </summary>
     public partial class UC_SelectBox : UserControl
     {
-        public delegate void ValueChangedHandler(UC_SelectBox sender, NBPFObject.EUnits units);
-        public event ValueChangedHandler? ValueChanged;
+        #region Event
+        /*
+         * Event triggered when the value in the ComboBox changes
+         */
+        public delegate void ValueChangedHandler(UC_SelectBox sender, Tools.GlobalParameters.EUnits units);
+        public event ValueChangedHandler? SelectItemChanged;
+        #endregion
 
 
-        public UC_SelectBox(NBPFObject.EDimension dimension)
+
+        #region Constructor
+        public UC_SelectBox(Tools.GlobalParameters.EDimension dimension, Tools.GlobalParameters.EUnits defaultUnits)
         {
             InitializeComponent();
+            UpdateSelectBox(dimension, defaultUnits);
+        }
+        #endregion
 
-            foreach (NBPFObject.EUnits val in Enum.GetValues(typeof(NBPFObject.EUnits)))
+
+
+        #region Private Method
+        /*
+         * Method for update combo box
+         */
+        private void UpdateSelectBox(Tools.GlobalParameters.EDimension dimension, Tools.GlobalParameters.EUnits defaultUnits)
+        {
+            foreach (Tools.GlobalParameters.EUnits val in Enum.GetValues(typeof(Tools.GlobalParameters.EUnits)))
             {
                 ComboBoxItem newItem = new ComboBoxItem();
                 newItem.Content = TextManager.CreateUnitsString(val, dimension);
@@ -39,14 +54,14 @@ namespace NBPF.Controls
 
                 switch (dimension)
                 {
-                    case NBPFObject.EDimension.frequancy:
-                        if((int)val >= 5)
+                    case Tools.GlobalParameters.EDimension.frequancy:
+                        if ((int)val >= 5)
                         {
                             SelectBox.Items.Add(newItem);
                         }
                         break;
-                    case NBPFObject.EDimension.length:
-                        if((int)val <= 5)
+                    case Tools.GlobalParameters.EDimension.length:
+                        if ((int)val <= 5)
                         {
                             SelectBox.Items.Add(newItem);
                         }
@@ -57,16 +72,28 @@ namespace NBPF.Controls
                 }
             }
 
+
             SelectBox.SelectedIndex = 0;
+            foreach (ComboBoxItem item in SelectBox.Items)
+            {
+                if ((Tools.GlobalParameters.EUnits)item.Tag == defaultUnits)
+                {
+                    SelectBox.SelectedItem = item;
+                }
+            }
             SelectBox.SelectionChanged += new SelectionChangedEventHandler(SelectBox_SelectionChanged);
         }
 
-        public void SelectBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /*
+         * Event handling when select item in combo box is changed
+         */
+        private void SelectBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            NBPFObject.EUnits units;
+            Tools.GlobalParameters.EUnits units;
             ComboBoxItem selectedItem = (ComboBoxItem)SelectBox.SelectedItem;
-            units = (NBPFObject.EUnits)selectedItem.Tag;
-            ValueChanged?.Invoke(this, units);
+            units = (Tools.GlobalParameters.EUnits)selectedItem.Tag;
+            SelectItemChanged?.Invoke(this, units);
         }
+        #endregion
     }
 }

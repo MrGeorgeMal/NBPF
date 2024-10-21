@@ -11,45 +11,53 @@ namespace NBPF.Tools
 {
     public static class TextManager
     {
+        #region Public Method
+        /*
+         * Method for check string for a number
+         */
         public static bool IsNumber(string text)
         {
             Regex regex = new Regex(@"^([+-]?\d+([.,]\d+)?(e[+-]?\d+([.,]\d+)?)?)$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
             return regex.IsMatch(text);
         }
 
-
+        /*
+         * Method for parse string into number
+         */
         public static double ToNumber(string text)
         {
             string bufferText = text.Replace(".", ",");
             return double.Parse(bufferText);
         }
 
-
-        public static string CreateUnitsString(NBPFObject.EUnits units, NBPFObject.EDimension dimension)
+        /*
+         * Method for create a string from two arguments: units and dimension 
+         */
+        public static string CreateUnitsString(Tools.GlobalParameters.EUnits units, Tools.GlobalParameters.EDimension dimension)
         {
             string unitsString = string.Empty;
             
             switch(units)
             {
-                case NBPFObject.EUnits.pico: unitsString = "п"; break;
-                case NBPFObject.EUnits.nano: unitsString = "н"; break;
-                case NBPFObject.EUnits.micro: unitsString = "мк"; break;
-                case NBPFObject.EUnits.milli: unitsString = "м"; break;
-                case NBPFObject.EUnits.centi: unitsString = "с"; break;
-                case NBPFObject.EUnits.none: unitsString = ""; break;
-                case NBPFObject.EUnits.kilo: unitsString = "к"; break;
-                case NBPFObject.EUnits.mega: unitsString = "М"; break;
-                case NBPFObject.EUnits.giga: unitsString = "Г"; break;
-                case NBPFObject.EUnits.tera: unitsString = "Т"; break;
+                case Tools.GlobalParameters.EUnits.pico: unitsString = "п"; break;
+                case Tools.GlobalParameters.EUnits.nano: unitsString = "н"; break;
+                case Tools.GlobalParameters.EUnits.micro: unitsString = "мк"; break;
+                case Tools.GlobalParameters.EUnits.milli: unitsString = "м"; break;
+                case Tools.GlobalParameters.EUnits.centi: unitsString = "с"; break;
+                case Tools.GlobalParameters.EUnits.none: unitsString = ""; break;
+                case Tools.GlobalParameters.EUnits.kilo: unitsString = "к"; break;
+                case Tools.GlobalParameters.EUnits.mega: unitsString = "М"; break;
+                case Tools.GlobalParameters.EUnits.giga: unitsString = "Г"; break;
+                case Tools.GlobalParameters.EUnits.tera: unitsString = "Т"; break;
             }
             switch(dimension)
             {
-                case NBPFObject.EDimension.frequancy: unitsString += "Гц"; break;
-                case NBPFObject.EDimension.length: unitsString += "м"; break;
-                case NBPFObject.EDimension.resistance: unitsString += "Ом"; break;
-                case NBPFObject.EDimension.conductance: unitsString += "См"; break;
-                case NBPFObject.EDimension.capacitance: unitsString += "Ф"; break;
-                case NBPFObject.EDimension.inductance: unitsString += "Гн"; break;
+                case Tools.GlobalParameters.EDimension.frequancy: unitsString += "Гц"; break;
+                case Tools.GlobalParameters.EDimension.length: unitsString += "м"; break;
+                case Tools.GlobalParameters.EDimension.resistance: unitsString += "Ом"; break;
+                case Tools.GlobalParameters.EDimension.conductance: unitsString += "См"; break;
+                case Tools.GlobalParameters.EDimension.capacitance: unitsString += "Ф"; break;
+                case Tools.GlobalParameters.EDimension.inductance: unitsString += "Гн"; break;
                 default:
                     unitsString += dimension;
                     break;
@@ -57,5 +65,6 @@ namespace NBPF.Tools
 
             return unitsString;
         }
+        #endregion
     }
 }

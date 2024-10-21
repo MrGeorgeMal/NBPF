@@ -13,22 +13,45 @@ namespace NBPF.NBPFClasses
 {
     public class Project : NBPFObject
     {
-        public VM_ContentManager contentManager;
-        public List<NBPFObject> nbpf_objects;
+        #region Private Member
+        private List<NBPFObject>? _nbpfObjects;
+        private double _fMin;
+        private double _fMax;
+        private int _points;
+        private UC_InputBox? _uc_fMin;
+        private UC_InputBox? _uc_fMax;
+        private UC_InputBox? _uc_points;
+        private UC_SelectBox? _uc_freqUnit;
+        private UC_SelectBox? _uc_geomUnit;
+        private Tools.GlobalParameters.EUnits _frequencyUnits = Tools.GlobalParameters.EUnits.none;
+        private Tools.GlobalParameters.EUnits _geometryUnits = Tools.GlobalParameters.EUnits.milli;
+        #endregion
 
-        public double fMin;
-        public double fMax;
-        public int points;
-        public EUnits frequencyUnits = EUnits.none;
-        public EUnits geometryUnits = EUnits.none;
 
-        public UC_InputBox uc_fMin;
-        public UC_InputBox uc_fMax;
-        public UC_InputBox uc_points;
-        public UC_SelectBox uc_freqUnit;
-        public UC_SelectBox uc_geomUnit;
 
+        #region Public Member
+        public List<NBPFObject> NBPFObjects { get { return _nbpfObjects; } }
+        public double fMin { get { return _fMin; } }
+        public double fMax { get { return _fMax; } }
+        public int Points { get { return _points; } }
+        #endregion
+
+
+
+        #region Constructor
         public Project()
+        {
+            SetupNewProject();
+        }
+        #endregion
+
+
+
+        #region Private Method
+        /*
+         * Method for setup new project
+         */
+        private void SetupNewProject()
         {
             Name = "Проект";
             Analysis analysis = new Analysis("Анализ");
@@ -37,60 +60,60 @@ namespace NBPF.NBPFClasses
             FilterStructure filterStructure = new FilterStructure("Структура фильтра");
             Chart chart = new Chart("График 1");
 
-            nbpf_objects = new List<NBPFObject>();
-            nbpf_objects.Add(this);
-            nbpf_objects.Add(analysis);
-            nbpf_objects.Add(synthesis);
-            nbpf_objects.Add(stripStructure);
-            nbpf_objects.Add(filterStructure);
-            nbpf_objects.Add(chart);
+            _nbpfObjects = new List<NBPFObject>();
+            _nbpfObjects.Add(this);
+            _nbpfObjects.Add(analysis);
+            _nbpfObjects.Add(synthesis);
+            _nbpfObjects.Add(stripStructure);
+            _nbpfObjects.Add(filterStructure);
+            _nbpfObjects.Add(chart);
 
-            uc_fMin = new UC_InputBox("1e6");
-            uc_fMax = new UC_InputBox("1e10");
-            uc_points = new UC_InputBox("1000");
-            uc_freqUnit = new UC_SelectBox(EDimension.frequancy);
-            uc_geomUnit = new UC_SelectBox(EDimension.length);
-            fMin = Tools.TextManager.ToNumber(uc_fMin.Value.Text);
-            fMax = Tools.TextManager.ToNumber(uc_fMax.Value.Text);
-            points = (int)Tools.TextManager.ToNumber(uc_points.Value.Text);
+            _uc_fMin = new UC_InputBox("1e6");
+            _uc_fMax = new UC_InputBox("1e10");
+            _uc_points = new UC_InputBox("1000");
+            _uc_freqUnit = new UC_SelectBox(Tools.GlobalParameters.EDimension.frequancy, _frequencyUnits);
+            _uc_geomUnit = new UC_SelectBox(Tools.GlobalParameters.EDimension.length, _geometryUnits);
+            _fMin = Tools.TextManager.ToNumber(_uc_fMin.Value.Text);
+            _fMax = Tools.TextManager.ToNumber(_uc_fMax.Value.Text);
+            _points = (int)Tools.TextManager.ToNumber(_uc_points.Value.Text);
 
-            uc_fMin.Description.Text = "Начальная частота анализа";
-            uc_fMax.Description.Text = "Конечная частота анализа";
-            uc_points.Description.Text = "Количество точек анализа";
-            uc_freqUnit.Description.Text = "Единицы измерения частоты";
-            uc_geomUnit.Description.Text = "Единицы измерения геометрических размеров";
+            _uc_fMin.Description.Text = "Начальная частота анализа";
+            _uc_fMax.Description.Text = "Конечная частота анализа";
+            _uc_points.Description.Text = "Количество точек анализа";
+            _uc_freqUnit.Description.Text = "Единицы измерения частоты";
+            _uc_geomUnit.Description.Text = "Единицы измерения геометрических размеров";
 
-            userControls.Add(uc_fMin);
-            userControls.Add(uc_fMax);
-            userControls.Add(uc_points);
-            userControls.Add(uc_freqUnit);
-            userControls.Add(uc_geomUnit);
+            userControls.Add(_uc_fMin);
+            userControls.Add(_uc_fMax);
+            userControls.Add(_uc_points);
+            userControls.Add(_uc_freqUnit);
+            userControls.Add(_uc_geomUnit);
 
-            uc_fMin.ValueChanged += new UC_InputBox.ValueChangedHandler(SetNewValue);
-            uc_fMax.ValueChanged += new UC_InputBox.ValueChangedHandler(SetNewValue);
-            uc_points.ValueChanged += new UC_InputBox.ValueChangedHandler(SetNewValue);
-            uc_freqUnit.ValueChanged += new UC_SelectBox.ValueChangedHandler(SetNewSelectedItem);
-            uc_geomUnit.ValueChanged += new UC_SelectBox.ValueChangedHandler(SetNewSelectedItem);
+            _uc_fMin.ValueChanged += new UC_InputBox.ValueChangedHandler(InputBox_ValueChanged);
+            _uc_fMax.ValueChanged += new UC_InputBox.ValueChangedHandler(InputBox_ValueChanged);
+            _uc_points.ValueChanged += new UC_InputBox.ValueChangedHandler(InputBox_ValueChanged);
+            _uc_freqUnit.SelectItemChanged += new UC_SelectBox.ValueChangedHandler(SelectBox_ValueChanged);
+            _uc_geomUnit.SelectItemChanged += new UC_SelectBox.ValueChangedHandler(SelectBox_ValueChanged);
         }
 
-        public void SetNewValue(UC_InputBox sender, double value)
+        /*
+         * Event handling when InputBox's value changed
+         */
+        private void InputBox_ValueChanged(UC_InputBox sender, double value)
         {
-            if (sender == uc_fMin) fMin = value;
-            if (sender == uc_fMax) fMax = value;
-            if (sender == uc_points) points = (int)value;
-
-            Debug.WriteLine(fMin);
-            Debug.WriteLine(fMax);
-            Debug.WriteLine(points);
+            if (sender == _uc_fMin) _fMin = value;
+            if (sender == _uc_fMax) _fMax = value;
+            if (sender == _uc_points) _points = (int)value;
         }
 
-        public void SetNewSelectedItem(UC_SelectBox sender, EUnits value)
+        /*
+         * Event handling when SelectBox's value changed
+         */
+        private void SelectBox_ValueChanged(UC_SelectBox sender, Tools.GlobalParameters.EUnits value)
         {
-            if (sender == uc_freqUnit) frequencyUnits = value;
-            if (sender == uc_geomUnit) geometryUnits = value;
-            
-            Debug.WriteLine(frequencyUnits);
-            Debug.WriteLine(geometryUnits);
+            if (sender == _uc_freqUnit) _frequencyUnits = value;
+            if (sender == _uc_geomUnit) _geometryUnits = value;
         }
+        #endregion
     }
 }

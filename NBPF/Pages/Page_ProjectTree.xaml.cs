@@ -19,21 +19,63 @@ using System.Windows.Shapes;
 
 namespace NBPF.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для Page_ProjectTree.xaml
-    /// </summary>
     public partial class Page_ProjectTree : Page
     {
+        #region Event
+        /*
+         * Event triggered when the item in project tree is changed
+         */
         public delegate void SelectedItemChangedHandler(Page_ProjectTree sender, NBPFObject selectedItem);
         public event SelectedItemChangedHandler? SelectedItemChanged;
+        #endregion
 
-        private Project _project;
 
+
+        #region Private Member
+        private Project? _project; // Stores the current open project
+        #endregion
+
+
+
+        #region Constuctor
         public Page_ProjectTree()
         {
             InitializeComponent();
         }
+        #endregion
 
+
+
+        #region Private Method
+        /*
+         * Event handling when selected item in project tree is changed or selected
+         */
+        private void ProjectTreeItem_Selected(object sender, RoutedEventArgs e)
+        {
+            if (_project == null) return;
+
+            TreeViewItem item = (TreeViewItem)ProjectTree.SelectedItem;
+            NBPFObject? selectedItem = null;
+
+            foreach (NBPFObject obj in _project.NBPFObjects)
+            {
+                if (item.Header.ToString() == obj.Name)
+                {
+                    selectedItem = obj;
+                    break;
+                }
+            }
+
+            SelectedItemChanged?.Invoke(this, selectedItem);
+        }
+        #endregion
+
+
+
+        #region Public Member
+        /*
+         * Method for update project tree
+         */
         public void UpdateProjectTree(Project project)
         {
             _project = project;
@@ -41,14 +83,14 @@ namespace NBPF.Pages
             TreeViewItem projectHeader = new TreeViewItem();
             TreeViewItem chartsHeader = new TreeViewItem();
 
-            projectHeader.Header = project.nbpf_objects.First().Name;
+            projectHeader.Header = project.NBPFObjects.First().Name;
             chartsHeader.Header = "Графики";
             projectHeader.IsExpanded = true;
             chartsHeader.IsExpanded = true;
             ProjectTree.Items.Add(projectHeader);
             projectHeader.Items.Add(chartsHeader);
 
-            foreach (NBPFObject obj in project.nbpf_objects)
+            foreach (NBPFObject obj in project.NBPFObjects)
             {
                 if (obj is not Project)
                 {
@@ -69,22 +111,6 @@ namespace NBPF.Pages
 
             ProjectTree.SelectedItemChanged += ProjectTreeItem_Selected;
         }
-
-        public void ProjectTreeItem_Selected(object sender, RoutedEventArgs e)
-        {
-            TreeViewItem item = (TreeViewItem)ProjectTree.SelectedItem;
-            NBPFObject selectedItem = null;
-
-            foreach (NBPFObject obj in _project.nbpf_objects)
-            {
-                if (item.Header.ToString() == obj.Name)
-                {
-                    selectedItem = obj;
-                    break;
-                }
-            }
-
-            SelectedItemChanged?.Invoke(this, selectedItem);
-        }
+        #endregion
     }
 }

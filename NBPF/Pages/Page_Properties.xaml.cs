@@ -16,16 +16,21 @@ using System.Windows.Shapes;
 
 namespace NBPF.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для Page_Properties.xaml
-    /// </summary>
     public partial class Page_Properties : Page
     {
+        #region Constructor
         public Page_Properties()
         {
             InitializeComponent();
         }
+        #endregion
 
+
+
+        #region Public Method
+        /*
+         * Method for update properties list
+         */
         public void UpdateProperties(NBPFObject item)
         {
             PropertyGrid.Children.Clear();
@@ -41,5 +46,6 @@ namespace NBPF.Pages
                 }
             }
         }
+        #endregion
     }
 }
