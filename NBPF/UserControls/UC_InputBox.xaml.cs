@@ -88,7 +88,7 @@ namespace NBPF.Controls
             TextBox textBox = (TextBox)sender;
             if (Tools.TextManager.IsNumber(textBox.Text))
             {
-                double value = TextManager.ToNumber(textBox.Text);
+                double value = TextManager.StringToNumber(textBox.Text);
                 ValueChanged?.Invoke(this, value);
             }
             else

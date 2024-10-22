@@ -1,6 +1,7 @@
 ﻿using NBPF.NBPFClasses;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -24,10 +25,19 @@ namespace NBPF.Tools
         /*
          * Method for parse string into number
          */
-        public static double ToNumber(string text)
+        public static double StringToNumber(string text)
         {
             string bufferText = text.Replace(".", ",");
             return double.Parse(bufferText);
+        }
+
+        /*
+         * Method for parse number to string
+         */
+        public static string NumberToString(double number)
+        {
+            string resultString = number.ToString();
+            return resultString;
         }
 
         /*
@@ -64,6 +74,27 @@ namespace NBPF.Tools
             }
 
             return unitsString;
+        }
+
+        /*
+         * Method for create a string from enum
+         */
+        public static string CreateStringFromEnumItem(object enumItem)
+        {
+            string resultString = string.Empty;
+
+            switch (enumItem)
+            {
+                case Tools.GlobalParameters.EAnalysisMethod:
+                    switch (enumItem)
+                    {
+                        case Tools.GlobalParameters.EAnalysisMethod.gridMethod: resultString = "Метод Сеток"; break;
+                        case Tools.GlobalParameters.EAnalysisMethod.finiteDifferenceMethod: resultString = "Метод Конечных Разностей"; break;
+                    }
+                    break;
+            }
+
+            return resultString;
         }
         #endregion
     }

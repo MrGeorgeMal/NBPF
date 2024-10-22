@@ -17,12 +17,18 @@ namespace NBPF.NBPFClasses
 
 
         #region Constructor
-        public NBPFObject() { }
+        public NBPFObject() { SetupObject(); }
 
-        public NBPFObject(string name)
-        {
-            Name = name;
-        }
+        public NBPFObject(string name) { Name = name; SetupObject(); }
+        #endregion
+
+
+
+        #region Protected Method
+        /*
+         * Method for setup NBPFObject
+         */
+        protected virtual void SetupObject() { }
         #endregion
     }
 }

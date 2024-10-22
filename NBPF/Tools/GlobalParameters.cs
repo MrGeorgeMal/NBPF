@@ -34,6 +34,12 @@ namespace NBPF.Tools
             capacitance,
             inductance
         }
+
+        public enum EAnalysisMethod
+        {
+            gridMethod,
+            finiteDifferenceMethod
+        }
         #endregion
     }
 }

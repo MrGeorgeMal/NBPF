@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static NBPF.Tools.GlobalParameters;
 
 namespace NBPF.Controls
 {
@@ -24,7 +25,7 @@ namespace NBPF.Controls
         /*
          * Event triggered when the value in the ComboBox changes
          */
-        public delegate void ValueChangedHandler(UC_SelectBox sender, Tools.GlobalParameters.EUnits units);
+        public delegate void ValueChangedHandler(UC_SelectBox sender, object units);
         public event ValueChangedHandler? SelectItemChanged;
         #endregion
 
@@ -36,13 +37,19 @@ namespace NBPF.Controls
             InitializeComponent();
             UpdateSelectBox(dimension, defaultUnits);
         }
+
+        public UC_SelectBox(Tools.GlobalParameters.EAnalysisMethod @enum, object? defaultValue = null)
+        {
+            InitializeComponent();
+            UpdateSelectBox(@enum, defaultValue);
+        }
         #endregion
 
 
 
         #region Private Method
         /*
-         * Method for update combo box
+         * Method for update combo box with dimension items
          */
         private void UpdateSelectBox(Tools.GlobalParameters.EDimension dimension, Tools.GlobalParameters.EUnits defaultUnits)
         {
@@ -85,14 +92,37 @@ namespace NBPF.Controls
         }
 
         /*
+         * Method for update combo box with universal items
+         */
+        private void UpdateSelectBox(Enum @enum, object defaultValue)
+        {
+            foreach (var val in Enum.GetValues(@enum.GetType()))
+            {
+                ComboBoxItem newItem = new ComboBoxItem();
+                newItem.Content = TextManager.CreateStringFromEnumItem(val);
+                newItem.Tag = val;
+                SelectBox.Items.Add(newItem);
+            }
+
+            SelectBox.SelectedIndex = 0;
+            foreach (ComboBoxItem item in SelectBox.Items)
+            {
+                if (item.Tag.ToString() == defaultValue.ToString())
+                {
+                    SelectBox.SelectedItem = item;
+                }
+            }
+            SelectBox.SelectionChanged += new SelectionChangedEventHandler(SelectBox_SelectionChanged);
+        }
+
+        /*
          * Event handling when select item in combo box is changed
          */
         private void SelectBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Tools.GlobalParameters.EUnits units;
             ComboBoxItem selectedItem = (ComboBoxItem)SelectBox.SelectedItem;
-            units = (Tools.GlobalParameters.EUnits)selectedItem.Tag;
-            SelectItemChanged?.Invoke(this, units);
+            var value = selectedItem.Tag;
+            SelectItemChanged?.Invoke(this, value);
         }
         #endregion
     }

@@ -39,19 +39,13 @@ namespace NBPF.NBPFClasses
 
 
         #region Constructor
-        public Project()
-        {
-            SetupNewProject();
-        }
+        public Project() : base() { }
         #endregion
 
 
 
-        #region Private Method
-        /*
-         * Method for setup new project
-         */
-        private void SetupNewProject()
+        #region Protected Method
+        protected override void SetupObject()
         {
             Name = "Проект";
             Analysis analysis = new Analysis("Анализ");
@@ -73,9 +67,9 @@ namespace NBPF.NBPFClasses
             _uc_points = new UC_InputBox("1000");
             _uc_freqUnit = new UC_SelectBox(Tools.GlobalParameters.EDimension.frequancy, _frequencyUnits);
             _uc_geomUnit = new UC_SelectBox(Tools.GlobalParameters.EDimension.length, _geometryUnits);
-            _fMin = Tools.TextManager.ToNumber(_uc_fMin.Value.Text);
-            _fMax = Tools.TextManager.ToNumber(_uc_fMax.Value.Text);
-            _points = (int)Tools.TextManager.ToNumber(_uc_points.Value.Text);
+            _fMin = Tools.TextManager.StringToNumber(_uc_fMin.Value.Text);
+            _fMax = Tools.TextManager.StringToNumber(_uc_fMax.Value.Text);
+            _points = (int)Tools.TextManager.StringToNumber(_uc_points.Value.Text);
 
             _uc_fMin.Description.Text = "Начальная частота анализа";
             _uc_fMax.Description.Text = "Конечная частота анализа";
@@ -95,7 +89,9 @@ namespace NBPF.NBPFClasses
             _uc_freqUnit.SelectItemChanged += new UC_SelectBox.ValueChangedHandler(SelectBox_ValueChanged);
             _uc_geomUnit.SelectItemChanged += new UC_SelectBox.ValueChangedHandler(SelectBox_ValueChanged);
         }
+        #endregion
 
+        #region Private Method
         /*
          * Event handling when InputBox's value changed
          */
@@ -109,10 +105,12 @@ namespace NBPF.NBPFClasses
         /*
          * Event handling when SelectBox's value changed
          */
-        private void SelectBox_ValueChanged(UC_SelectBox sender, Tools.GlobalParameters.EUnits value)
+        private void SelectBox_ValueChanged(UC_SelectBox sender, object value)
         {
-            if (sender == _uc_freqUnit) _frequencyUnits = value;
-            if (sender == _uc_geomUnit) _geometryUnits = value;
+            if (sender == _uc_freqUnit) _frequencyUnits = (Tools.GlobalParameters.EUnits)value;
+            if (sender == _uc_geomUnit) _geometryUnits = (Tools.GlobalParameters.EUnits)value;
+            Debug.WriteLine(_frequencyUnits);
+            Debug.WriteLine(_geometryUnits);
         }
         #endregion
     }
