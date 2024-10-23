@@ -26,6 +26,8 @@ namespace NBPF.UserControls
 
         #region Public Member
         public float Zoomfactor { get; set; } = 1.1f;
+        public float MaxZoom { get; set; } = 2.0f;
+        public float MinZoom { get; set; } = 0.2f;
         public MatrixTransform Transform { get { return _transform; } }
         public Color BackgroundColor
         {
@@ -80,11 +82,11 @@ namespace NBPF.UserControls
             if (e.Delta < 0)
             {
                 scaleFactor = 1f / scaleFactor;
-                if (_transform.Matrix.M11 < 0.5f) return;
+                if (_transform.Matrix.M11 < MinZoom) return;
             }
             else
             {
-                if (_transform.Matrix.M11 > 2.0f) return;
+                if (_transform.Matrix.M11 > MaxZoom) return;
             }
 
             Point mousePostion = e.GetPosition(this);
