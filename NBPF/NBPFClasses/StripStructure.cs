@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using static NBPF.Tools.GlobalParameters;
 
@@ -31,6 +32,8 @@ namespace NBPF.NBPFClasses
         #region Protected Method
         protected override void SetupObject()
         {
+            WorkspaceUserControl = new UserControls.UC_PanAndZoomCanvas();
+
             _uc_stripStructureType = new UC_SelectBox(new Tools.GlobalParameters.EStripStructreType(), _stripStructreType);
 
             _uc_stripStructureType.Description.Text = "Тип полосковой структуры";
@@ -60,6 +63,11 @@ namespace NBPF.NBPFClasses
          */
         private void UpdateUserControls()
         {
+            if (WorkspaceUserControl != null)
+            {
+                WorkspaceUserControl.Children.Clear();
+            }
+
             userControls.Clear();
             userControls.Add(_uc_stripStructureType);
 
@@ -76,6 +84,14 @@ namespace NBPF.NBPFClasses
             if(_stripStructure != null)
             {
                 userControls.AddRange(_stripStructure.userControls);
+                if (WorkspaceUserControl != null)
+                {
+                    foreach (UIElement element in _stripStructure.DrawElements)
+                    {
+                        WorkspaceUserControl.Children.Add(element);
+                        element.RenderTransform = WorkspaceUserControl.Transform;
+                    }
+                }
             }
 
             base.PropertiesNeedUpdate(this);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NBPF.NBPFClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,19 @@ namespace NBPF.Pages
         {
             InitializeComponent();
         }
+
+        /*
+         * Method for update Workspace content
+         */
+        public void UpdateWorkspace(NBPFObject item)
+        {
+            WorkspaceGrid.Children.Clear();
+
+            if (item != null && item.WorkspaceUserControl != null)
+            {
+                WorkspaceGrid.Children.Add(item.WorkspaceUserControl);
+            }
+        }
+
     }
 }

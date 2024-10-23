@@ -1,8 +1,10 @@
-﻿using System;
+﻿using NBPF.UserControls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace NBPF.NBPFClasses
@@ -22,6 +24,8 @@ namespace NBPF.NBPFClasses
         #region Public Member
         public string Name { get; set; } = "NBPFObject";
         public List<UserControl> userControls { get; set; } = new List<UserControl>();
+        public UC_PanAndZoomCanvas? WorkspaceUserControl { get; set; }
+        public List<UIElement> DrawElements { get; set; } = new List<UIElement>();
         #endregion
 
 

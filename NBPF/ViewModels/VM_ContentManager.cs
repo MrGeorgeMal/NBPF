@@ -57,6 +57,7 @@ namespace NBPF.ViewModels
         public void ProjectTree_SelectedItemChanged(Page_ProjectTree sender, NBPFObject selectedItem)
         {
             PageProperties.UpdateProperties(selectedItem);
+            PageWorkspace.UpdateWorkspace(selectedItem);
         }
 
         /*

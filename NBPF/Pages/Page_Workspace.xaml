@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Page_Workspace">
 
-    <Grid Background="PaleVioletRed">
+    <Grid x:Name="WorkspaceGrid" ClipToBounds="True">
         
     </Grid>
 </Page>
