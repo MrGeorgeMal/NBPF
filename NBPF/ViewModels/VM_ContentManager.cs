@@ -43,6 +43,11 @@ namespace NBPF.ViewModels
                 _project = Tools.SaveLoad.LoadNewProject();
                 PageProjectTree.UpdateProjectTree(_project);
                 PageProjectTree.SelectedItemChanged += new Page_ProjectTree.SelectedItemChangedHandler(ProjectTree_SelectedItemChanged);
+
+                foreach(NBPFObject obj in _project.NBPFObjects)
+                {
+                    obj.ObjectUpdated += new NBPFObject.ObjectUpdatedEventHandler(NBPFObject_ObjectUpdated);
+                }
             }
         }
 
@@ -52,6 +57,14 @@ namespace NBPF.ViewModels
         public void ProjectTree_SelectedItemChanged(Page_ProjectTree sender, NBPFObject selectedItem)
         {
             PageProperties.UpdateProperties(selectedItem);
+        }
+
+        /*
+         * Event handling when userControls in NBPFObject is changed
+         */
+        public void NBPFObject_ObjectUpdated(NBPFObject sender)
+        {
+            PageProperties.UpdateProperties(sender);
         }
         #endregion
     }

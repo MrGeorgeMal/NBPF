@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,36 @@ namespace NBPF.UserControls
     /// </summary>
     public partial class UC_CheckBox : UserControl
     {
-        public UC_CheckBox()
+        #region Event
+        /*
+         * Event on Flag value change
+         */
+        public delegate void ValueChangedHandler(UC_CheckBox sender, bool value);
+        public event ValueChangedHandler? ValueChanged;
+        #endregion
+
+
+
+        #region Constructor
+        public UC_CheckBox(bool defaultValue)
         {
             InitializeComponent();
+            Flag.IsChecked = defaultValue;
+            Flag.Click += new RoutedEventHandler(Flag_Checked);
         }
+        #endregion
+
+
+
+        #region Private Method
+        /*
+         * Event handling when Flag value changed
+         */
+        private void Flag_Checked(object sender, RoutedEventArgs e)
+        {
+            if (Flag.IsChecked == null) return;
+            ValueChanged?.Invoke(this, Flag.IsChecked.Value);
+        }
+        #endregion
     }
 }

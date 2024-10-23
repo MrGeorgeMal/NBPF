@@ -9,6 +9,14 @@ namespace NBPF.NBPFClasses
 {
     public class NBPFObject
     {
+        #region Event
+        /*
+         * Event for update Properties when userControls in NBPFObject is changed
+         */
+        public delegate void ObjectUpdatedEventHandler(NBPFObject sender);
+        public event ObjectUpdatedEventHandler? ObjectUpdated;
+        #endregion
+
         #region Public Member
         public string Name { get; set; } = "NBPFObject";
         public List<UserControl> userControls { get; set; } = new List<UserControl>();
@@ -29,6 +37,17 @@ namespace NBPF.NBPFClasses
          * Method for setup NBPFObject
          */
         protected virtual void SetupObject() { }
+
+        /*
+         * Method for call Event ObjectUpdated
+         */
+        protected virtual void PropertiesNeedUpdate(NBPFObject sender)
+        {
+            if(ObjectUpdated != null)
+            {
+                ObjectUpdated(sender);
+            }
+        }
         #endregion
     }
 }
