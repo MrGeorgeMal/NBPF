@@ -40,6 +40,15 @@ namespace NBPF.Tools
             gridMethod,
             finiteDifferenceMethod
         }
+
+        public enum EStripStructreType
+        {
+            custom,
+            stripLines,
+            coplanarStripLines,
+            coupledStripLines,
+            coupledStripLinesVIP,
+        }
         #endregion
     }
 }

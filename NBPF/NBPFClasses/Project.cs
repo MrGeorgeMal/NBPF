@@ -51,7 +51,7 @@ namespace NBPF.NBPFClasses
             Analysis analysis = new Analysis("Анализ");
             Synthesis synthesis = new Synthesis("Синтез");
             StripStructure stripStructure = new StripStructure("Полосковая структура");
-            FilterStructure filterStructure = new FilterStructure("Структура фильтра");
+            FilterStructure filterStructure = new FilterStructure("Эквивалентная схема");
             Chart chart = new Chart("График 1");
 
             _nbpfObjects = new List<NBPFObject>();

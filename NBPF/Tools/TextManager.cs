@@ -46,8 +46,8 @@ namespace NBPF.Tools
         public static string CreateUnitsString(Tools.GlobalParameters.EUnits units, Tools.GlobalParameters.EDimension dimension)
         {
             string unitsString = string.Empty;
-            
-            switch(units)
+
+            switch (units)
             {
                 case Tools.GlobalParameters.EUnits.pico: unitsString = "п"; break;
                 case Tools.GlobalParameters.EUnits.nano: unitsString = "н"; break;
@@ -60,7 +60,7 @@ namespace NBPF.Tools
                 case Tools.GlobalParameters.EUnits.giga: unitsString = "Г"; break;
                 case Tools.GlobalParameters.EUnits.tera: unitsString = "Т"; break;
             }
-            switch(dimension)
+            switch (dimension)
             {
                 case Tools.GlobalParameters.EDimension.frequancy: unitsString += "Гц"; break;
                 case Tools.GlobalParameters.EDimension.length: unitsString += "м"; break;
@@ -90,6 +90,17 @@ namespace NBPF.Tools
                     {
                         case Tools.GlobalParameters.EAnalysisMethod.gridMethod: resultString = "Метод Сеток"; break;
                         case Tools.GlobalParameters.EAnalysisMethod.finiteDifferenceMethod: resultString = "Метод Конечных Разностей"; break;
+                    }
+                    break;
+
+                case Tools.GlobalParameters.EStripStructreType:
+                    switch (enumItem)
+                    {
+                        case Tools.GlobalParameters.EStripStructreType.custom: resultString = "Пользовательская Структура"; break;
+                        case Tools.GlobalParameters.EStripStructreType.stripLines: resultString = "Полосковая Линия"; break;
+                        case Tools.GlobalParameters.EStripStructreType.coplanarStripLines: resultString = "Копланарная Полосковая Линия"; break;
+                        case Tools.GlobalParameters.EStripStructreType.coupledStripLines: resultString = "Связанные Полосковые Линии"; break;
+                        case Tools.GlobalParameters.EStripStructreType.coupledStripLinesVIP: resultString = "Связанные Полосковые Линии (VIP)"; break;
                     }
                     break;
             }

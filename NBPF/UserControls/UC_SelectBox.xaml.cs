@@ -25,7 +25,7 @@ namespace NBPF.Controls
         /*
          * Event triggered when the value in the ComboBox changes
          */
-        public delegate void ValueChangedHandler(UC_SelectBox sender, object units);
+        public delegate void ValueChangedHandler(UC_SelectBox sender, object value);
         public event ValueChangedHandler? SelectItemChanged;
         #endregion
 
@@ -38,7 +38,7 @@ namespace NBPF.Controls
             UpdateSelectBox(dimension, defaultUnits);
         }
 
-        public UC_SelectBox(Tools.GlobalParameters.EAnalysisMethod @enum, object? defaultValue = null)
+        public UC_SelectBox(Enum @enum, object? defaultValue = null)
         {
             InitializeComponent();
             UpdateSelectBox(@enum, defaultValue);

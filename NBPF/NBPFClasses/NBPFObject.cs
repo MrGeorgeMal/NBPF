@@ -17,6 +17,8 @@ namespace NBPF.NBPFClasses
         public event ObjectUpdatedEventHandler? ObjectUpdated;
         #endregion
 
+
+
         #region Public Member
         public string Name { get; set; } = "NBPFObject";
         public List<UserControl> userControls { get; set; } = new List<UserControl>();
