@@ -25,7 +25,6 @@ namespace NBPF.NBPFClasses
         public string Name { get; set; } = "NBPFObject";
         public List<UserControl> userControls { get; set; } = new List<UserControl>();
         public UC_PanAndZoomCanvas? WorkspaceUserControl { get; set; }
-        public List<UIElement> DrawElements { get; set; } = new List<UIElement>();
         #endregion
 
 
@@ -52,6 +51,18 @@ namespace NBPF.NBPFClasses
             if(ObjectUpdated != null)
             {
                 ObjectUpdated(sender);
+            }
+        }
+
+        protected void UpdateWorkspace(List<UIElement> elements)
+        {
+            if (WorkspaceUserControl != null)
+            {
+                foreach (UIElement element in elements)
+                {
+                    WorkspaceUserControl.Children.Add(element);
+                    element.RenderTransform = WorkspaceUserControl.Transform;
+                }
             }
         }
         #endregion

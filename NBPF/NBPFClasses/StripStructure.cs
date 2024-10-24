@@ -1,5 +1,6 @@
 ﻿using NBPF.Controls;
 using NBPF.StripStructure;
+using NBPF.StripStructureType;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,7 +17,7 @@ namespace NBPF.NBPFClasses
     {
         #region Private Member
         private Tools.GlobalParameters.EStripStructreType _stripStructreType = Tools.GlobalParameters.EStripStructreType.coupledStripLinesVIP;
-        private StripStructure? _stripStructure;
+        private StripStructureBase? _stripStructure;
         private UC_SelectBox? _uc_stripStructureType;
         #endregion
 
@@ -83,15 +84,8 @@ namespace NBPF.NBPFClasses
 
             if(_stripStructure != null)
             {
-                userControls.AddRange(_stripStructure.userControls);
-                if (WorkspaceUserControl != null)
-                {
-                    foreach (UIElement element in _stripStructure.DrawElements)
-                    {
-                        WorkspaceUserControl.Children.Add(element);
-                        element.RenderTransform = WorkspaceUserControl.Transform;
-                    }
-                }
+                userControls.AddRange(_stripStructure.UserControls);
+                UpdateWorkspace(_stripStructure.WorkspaceElements);
             }
 
             base.PropertiesNeedUpdate(this);

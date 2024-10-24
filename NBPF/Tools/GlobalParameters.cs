@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Ink;
+using System.Windows.Media;
 
 namespace NBPF.Tools
 {
@@ -49,6 +51,24 @@ namespace NBPF.Tools
             coupledStripLines,
             coupledStripLinesVIP,
         }
+
+        public enum EMaterialType
+        {
+            conductor,
+            dielectric
+        }
+        #endregion
+
+
+
+        #region Public Member
+        public static Brush DimensionLineStrokeColor = Brushes.White;
+        public static Brush ConductorStrokeColor = Brushes.Red;
+        public static Brush ConductorFillColor = Brushes.Orange;
+        public static Brush DielectricStrokeColor = Brushes.DarkGreen;
+        public static Brush DielectricFillColor = Brushes.Green;
+        public static Brush WorkspaceFontColor = Brushes.White;
+        public static float WorkspaceFontSize = 30.0f;
         #endregion
     }
 }

@@ -1,5 +1,7 @@
 ﻿using NBPF.Controls;
 using NBPF.NBPFClasses;
+using NBPF.StripStructureType;
+using NBPF.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +14,7 @@ using static NBPF.Tools.GlobalParameters;
 
 namespace NBPF.StripStructure
 {
-    public class CoplanarStripLinesVIP : NBPFClasses.StripStructure
+    public class CoplanarStripLinesVIP : StripStructureBase
     {
         #region Private Member
         private UC_InputBox? _uc_a;
@@ -33,13 +35,12 @@ namespace NBPF.StripStructure
 
         #region Constructor
         public CoplanarStripLinesVIP() { }
-        public CoplanarStripLinesVIP(string name) : base(name) { }
         #endregion
 
 
 
         #region Protected Method
-        protected override void SetupObject()
+        protected override void SetupStripStructure()
         {
             _uc_a = new UC_InputBox();
             _uc_h1 = new UC_InputBox();
@@ -67,32 +68,26 @@ namespace NBPF.StripStructure
             _uc_e3.Description.Text = "(\u03B5r3) Относительная диэлектрическая проницаемость";
             _uc_e4.Description.Text = "(\u03B5r4) Относительная диэлектрическая проницаемость";
 
-            userControls.Add(_uc_a);
-            userControls.Add(_uc_h1);
-            userControls.Add(_uc_h2);
-            userControls.Add(_uc_h3);
-            userControls.Add(_uc_h4);
-            userControls.Add(_uc_w1);
-            userControls.Add(_uc_w2);
-            userControls.Add(_uc_d);
-            userControls.Add(_uc_e1);
-            userControls.Add(_uc_e2);
-            userControls.Add(_uc_e3);
-            userControls.Add(_uc_e4);
+            _userControls.Add(_uc_a);
+            _userControls.Add(_uc_h1);
+            _userControls.Add(_uc_h2);
+            _userControls.Add(_uc_h3);
+            _userControls.Add(_uc_h4);
+            _userControls.Add(_uc_w1);
+            _userControls.Add(_uc_w2);
+            _userControls.Add(_uc_d);
+            _userControls.Add(_uc_e1);
+            _userControls.Add(_uc_e2);
+            _userControls.Add(_uc_e3);
+            _userControls.Add(_uc_e4);
 
-            Rectangle rect = new Rectangle();
-            rect.Width = 100;
-            rect.Height = 100;
-            rect.Fill = Brushes.White;
-            rect.Stroke = Brushes.Red;
+            UC_RectangleStripElement newRect = new UC_RectangleStripElement();
+            newRect.WidthElement = 500;
+            newRect.HeightElement = 200;
+            newRect.WidthDimensionLineLength = -50;
+            newRect.HeightDimensionLineLength = -50;
 
-            TextBlock textBlock = new TextBlock();
-            textBlock.Text = "100";
-            textBlock.FontSize = 20;
-            Canvas.SetLeft(textBlock, 150);
-
-            DrawElements.Add(rect);
-            DrawElements.Add(textBlock);
+            _workspaceElements.Add(newRect);
         }
         #endregion
 
