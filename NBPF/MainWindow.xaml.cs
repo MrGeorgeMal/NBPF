@@ -14,6 +14,7 @@ namespace NBPF
 {
     public partial class MainWindow : Window
     {
+        //test
         public MainWindow()
         {
             InitializeComponent();
