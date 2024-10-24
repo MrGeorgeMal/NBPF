@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace NBPF.UserControls
 {
-    public partial class UC_RectangleStripElement : UC_BlueprintObject
+    public partial class UC_RectangleStripElement : Canvas
     {
         private delegate void ElementChangedHandler();
         event ElementChangedHandler? ElementChanged;
@@ -302,10 +302,5 @@ namespace NBPF.UserControls
         }
         #endregion
 
-
-        protected override void Draw()
-        {
-            base.Draw();
-        }
     }
 }

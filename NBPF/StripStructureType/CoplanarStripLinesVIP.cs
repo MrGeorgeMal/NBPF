@@ -1,4 +1,5 @@
-﻿using NBPF.Controls;
+﻿using NBPF.Blueprint;
+using NBPF.Controls;
 using NBPF.NBPFClasses;
 using NBPF.StripStructureType;
 using NBPF.UserControls;
@@ -87,7 +88,9 @@ namespace NBPF.StripStructure
             newRect.WidthDimensionLineLength = -50;
             newRect.HeightDimensionLineLength = -50;
 
-            _workspaceElements.Add(newRect);
+            BPRectangle rectangle = new BPRectangle();
+
+            _workspaceElements.Add(rectangle.DrawLayer);
         }
         #endregion
 
