@@ -50,7 +50,7 @@ namespace NBPF.Blueprint
         public float Length
         {
             get { return _length; }
-            set { _length = -1.0f * value; base.Update(); }
+            set { _length = value; base.Update(); }
         }
         public string DescriptionText
         {
@@ -111,8 +111,9 @@ namespace NBPF.Blueprint
             l2.Y1 = _y2;
 
             float bufferGap;
-            if (_length > 0) bufferGap = _gap;
-            else bufferGap = -1.0f * _gap;
+            if (_length == 0.0f) bufferGap = 0.0f;
+            else if (_length > 0.0f) bufferGap = -1.0f * _gap;
+            else bufferGap = _gap;
 
             Size mesureSize = new Size(1000, 1000);
             descrition.Measure(mesureSize);
@@ -121,9 +122,9 @@ namespace NBPF.Blueprint
             if (_y1 == _y2)
             {
                 l1.X2 = _x1;
-                l1.Y2 = _y1 + _length;
+                l1.Y2 = _y1 - _length;
                 l2.X2 = _x2;
-                l2.Y2 = _y2 + _length;
+                l2.Y2 = _y2 - _length;
 
                 l3.X1 = _x1;
                 l3.Y1 = l1.Y2 - bufferGap;
@@ -133,14 +134,14 @@ namespace NBPF.Blueprint
                 arrow1.Points = new PointCollection()
                     {
                         new Point(l3.X1, l3.Y1),
-                        new Point(l3.X1 + _arrowSize, l3.Y1 - _arrowSize / 2),
-                        new Point(l3.X1 + _arrowSize, l3.Y1 + _arrowSize / 2)
+                        new Point(l3.X1 + _arrowSize, l3.Y1 - _arrowSize / 2.0f),
+                        new Point(l3.X1 + _arrowSize, l3.Y1 + _arrowSize / 2.0f)
                     };
                 arrow2.Points = new PointCollection()
                     {
                         new Point(l3.X2, l3.Y2),
-                        new Point(l3.X2 - _arrowSize, l3.Y2 + _arrowSize / 2),
-                        new Point(l3.X2 - _arrowSize, l3.Y2 - _arrowSize / 2)
+                        new Point(l3.X2 - _arrowSize, l3.Y2 + _arrowSize / 2.0f),
+                        new Point(l3.X2 - _arrowSize, l3.Y2 - _arrowSize / 2.0f)
                     };
 
                 Canvas.SetLeft(descrition, l3.X1 + Math.Abs(l3.X2 - l3.X1) / 2.0f - descriptionSize.Width / 2.0f);
@@ -149,9 +150,9 @@ namespace NBPF.Blueprint
 
             if (_x1 == _x2)
             {
-                l1.X2 = _x1 - _length;
+                l1.X2 = _x1 + _length;
                 l1.Y2 = _y1;
-                l2.X2 = _x2 - _length;
+                l2.X2 = _x2 + _length;
                 l2.Y2 = _y2;
 
                 l3.X1 = l1.X2 + bufferGap;
@@ -162,18 +163,18 @@ namespace NBPF.Blueprint
                 arrow1.Points = new PointCollection()
                     {
                         new Point(l3.X1, l3.Y1),
-                        new Point(l3.X1 + _arrowSize / 2, l3.Y1 - _arrowSize),
-                        new Point(l3.X1 - _arrowSize / 2, l3.Y1 - _arrowSize)
+                        new Point(l3.X1 + _arrowSize / 2.0f, l3.Y1 - _arrowSize),
+                        new Point(l3.X1 - _arrowSize / 2.0f, l3.Y1 - _arrowSize)
                     };
                 arrow2.Fill = Tools.GlobalParameters.DimensionLineStrokeColor;
                 arrow2.Points = new PointCollection()
                     {
                         new Point(l3.X2, l3.Y2),
-                        new Point(l3.X2 + _arrowSize / 2, l3.Y2 + _arrowSize),
-                        new Point(l3.X2 - _arrowSize / 2, l3.Y2 + _arrowSize)
+                        new Point(l3.X2 + _arrowSize / 2.0f, l3.Y2 + _arrowSize),
+                        new Point(l3.X2 - _arrowSize / 2.0f, l3.Y2 + _arrowSize)
                     };
 
-                if (_length <= 0.0f)
+                if (_length >= 0.0f)
                 {
                     Canvas.SetLeft(descrition, l3.X1 + _descriptionGap);
                     Canvas.SetTop(descrition, l3.Y1 - Math.Abs(l3.Y2 - l3.Y1) / 2.0f - descriptionSize.Height / 1.6f);

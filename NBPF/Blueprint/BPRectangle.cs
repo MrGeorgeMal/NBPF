@@ -16,6 +16,8 @@ namespace NBPF.Blueprint
         private float _height = 100;
         private BPDimensionLines _widthDimensionLines;
         private BPDimensionLines _heightDimensionLines;
+        private bool _showWidthDimensionLines = true;
+        private bool _showHeightDimensionLines = true;
         #endregion
 
 
@@ -39,6 +41,17 @@ namespace NBPF.Blueprint
         {
             get { return _heightDimensionLines; }
         }
+        public bool ShowWidthDimensionLines
+        {
+            get { return _showWidthDimensionLines; }
+            set { _showWidthDimensionLines = value; base.Update(); }
+        }
+        public bool ShowHeightDimensionLines
+        {
+            get { return _showHeightDimensionLines; }
+            set { _showHeightDimensionLines = value; base.Update(); }
+        }
+
         #endregion
 
 
@@ -52,6 +65,7 @@ namespace NBPF.Blueprint
         #region Protected Method
         protected override void SetupObject()
         {
+            // Draw rectangle
             Path path = new Path();
             path.Fill = Tools.GlobalParameters.DielectricFillColor;
             path.Stroke = Tools.GlobalParameters.DielectricStrokeColor;
@@ -63,13 +77,19 @@ namespace NBPF.Blueprint
 
             _drawElements.Add(path);
 
-            _widthDimensionLines = new BPDimensionLines(_x, _y - _height, _x + _width, _y - _height);
-            _widthDimensionLines.Length = 50;
-            _heightDimensionLines = new BPDimensionLines(_x + _width, _y, _x + _width, _y - _height);
-            _heightDimensionLines.Length = 50;
 
-            _drawElements.Add(_widthDimensionLines.DrawLayer);
-            _drawElements.Add(_heightDimensionLines.DrawLayer);
+            // Draw dimension lines
+            if (_showWidthDimensionLines)
+            {
+                _widthDimensionLines = new BPDimensionLines(_x, _y - _height, _x + _width, _y - _height);
+                _drawElements.Add(_widthDimensionLines.DrawLayer);
+            }
+
+            if (_showHeightDimensionLines)
+            {
+                _heightDimensionLines = new BPDimensionLines(_x + _width, _y, _x + _width, _y - _height);
+                _drawElements.Add(_heightDimensionLines.DrawLayer);
+            }
         }
         #endregion
     }

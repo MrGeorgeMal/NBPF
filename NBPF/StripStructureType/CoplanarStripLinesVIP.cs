@@ -82,14 +82,12 @@ namespace NBPF.StripStructure
             _userControls.Add(_uc_e3);
             _userControls.Add(_uc_e4);
 
-            UC_RectangleStripElement newRect = new UC_RectangleStripElement();
-            newRect.WidthElement = 500;
-            newRect.HeightElement = 200;
-            newRect.WidthDimensionLineLength = -50;
-            newRect.HeightDimensionLineLength = -50;
 
             BPRectangle rectangle = new BPRectangle();
             rectangle.X = 100;
+            rectangle.WidthDimensionLines.DescriptionValue = "10";
+            rectangle.WidthDimensionLines.Length = 0.0f;
+            rectangle.HeightDimensionLines.Length = 0.0f;
 
             _workspaceElements.Add(rectangle.DrawLayer);
         }
