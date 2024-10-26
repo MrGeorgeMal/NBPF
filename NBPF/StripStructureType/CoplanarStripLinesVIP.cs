@@ -89,6 +89,7 @@ namespace NBPF.StripStructure
             newRect.HeightDimensionLineLength = -50;
 
             BPRectangle rectangle = new BPRectangle();
+            rectangle.X = 100;
 
             _workspaceElements.Add(rectangle.DrawLayer);
         }

@@ -76,8 +76,6 @@ namespace NBPF.Blueprint
 
             foreach(UIElement element in _drawElements)
             {
-                Canvas.SetLeft(element, X);
-                Canvas.SetTop(element, -1 * Y);
                 _drawLayer.Children.Add(element);
             }
         }

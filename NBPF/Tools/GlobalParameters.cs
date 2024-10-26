@@ -10,7 +10,7 @@ namespace NBPF.Tools
 {
     public static class GlobalParameters
     {
-        #region Enum
+        #region Public Enum
         public enum EUnits : int
         {
             pico,
@@ -69,6 +69,8 @@ namespace NBPF.Tools
         public static Brush DielectricFillColor = Brushes.Green;
         public static Brush WorkspaceFontColor = Brushes.White;
         public static float WorkspaceFontSize = 30.0f;
+        public static float RectangleStrokeThickness = 5.0f;
+        public static float DimentionLinesStrokeThickness = 1.0f;
         #endregion
     }
 }

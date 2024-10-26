@@ -14,6 +14,8 @@ namespace NBPF.Blueprint
         #region Private Member
         private float _width = 100;
         private float _height = 100;
+        private BPDimensionLines _widthDimensionLines;
+        private BPDimensionLines _heightDimensionLines;
         #endregion
 
 
@@ -28,6 +30,14 @@ namespace NBPF.Blueprint
         {
             get { return _height; }
             set { _height = value; base.Update(); }
+        }
+        public BPDimensionLines WidthDimensionLines
+        {
+            get { return _widthDimensionLines; }
+        }
+        public BPDimensionLines HeightDimensionLines
+        {
+            get { return _heightDimensionLines; }
         }
         #endregion
 
@@ -45,12 +55,21 @@ namespace NBPF.Blueprint
             Path path = new Path();
             path.Fill = Tools.GlobalParameters.DielectricFillColor;
             path.Stroke = Tools.GlobalParameters.DielectricStrokeColor;
+            path.StrokeThickness = Tools.GlobalParameters.RectangleStrokeThickness;
 
             RectangleGeometry rectangle = new RectangleGeometry();
             rectangle.Rect = new System.Windows.Rect(new System.Windows.Point(_x, _y), new System.Windows.Point(_x + _width, _y - _height));
             path.Data = rectangle;
 
             _drawElements.Add(path);
+
+            _widthDimensionLines = new BPDimensionLines(_x, _y - _height, _x + _width, _y - _height);
+            _widthDimensionLines.Length = 50;
+            _heightDimensionLines = new BPDimensionLines(_x + _width, _y, _x + _width, _y - _height);
+            _heightDimensionLines.Length = 50;
+
+            _drawElements.Add(_widthDimensionLines.DrawLayer);
+            _drawElements.Add(_heightDimensionLines.DrawLayer);
         }
         #endregion
     }
