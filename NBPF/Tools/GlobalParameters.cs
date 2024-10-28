@@ -57,6 +57,15 @@ namespace NBPF.Tools
             conductor,
             dielectric
         }
+
+        public enum EOutlinePosition
+        {
+            center,
+            top,
+            bottom,
+            left,
+            right
+        }
         #endregion
 
 
