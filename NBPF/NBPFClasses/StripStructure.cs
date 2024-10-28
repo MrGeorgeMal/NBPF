@@ -51,7 +51,7 @@ namespace NBPF.NBPFClasses
 
         #region Private Method
         /*
-         * 
+         * Event handling when SelectBox's value changed
          */
         private void SelectBox_SelectItemChanged(UC_SelectBox sender, object value)
         {

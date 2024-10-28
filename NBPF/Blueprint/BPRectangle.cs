@@ -18,6 +18,9 @@ namespace NBPF.Blueprint
         private BPDimensionLines _heightDimensionLines;
         private bool _showWidthDimensionLines = true;
         private bool _showHeightDimensionLines = true;
+        private bool _isWidthDimensionLinesUp = true;
+        private bool _isHeightDimensionLinesRight = true;
+        private Tools.GlobalParameters.EMaterialType _material = Tools.GlobalParameters.EMaterialType.dielectric;
         #endregion
 
 
@@ -51,7 +54,21 @@ namespace NBPF.Blueprint
             get { return _showHeightDimensionLines; }
             set { _showHeightDimensionLines = value; base.Update(); }
         }
-
+        public bool IsWidthDimensionLinesUp
+        {
+            get { return _isWidthDimensionLinesUp; }
+            set { _isWidthDimensionLinesUp = value; base.Update(); }
+        }
+        public bool IsHeightDimensionLinesUp
+        {
+            get { return _isHeightDimensionLinesRight; }
+            set { _isHeightDimensionLinesRight = value; base.Update(); }
+        }
+        public Tools.GlobalParameters.EMaterialType Material
+        {
+            get { return _material; }
+            set { _material = value; Update(); }
+        }
         #endregion
 
 
@@ -67,9 +84,20 @@ namespace NBPF.Blueprint
         {
             // Draw rectangle
             Path path = new Path();
-            path.Fill = Tools.GlobalParameters.DielectricFillColor;
-            path.Stroke = Tools.GlobalParameters.DielectricStrokeColor;
+
             path.StrokeThickness = Tools.GlobalParameters.RectangleStrokeThickness;
+            switch (_material)
+            {
+                case Tools.GlobalParameters.EMaterialType.dielectric:
+                    path.Fill = Tools.GlobalParameters.DielectricFillColor;
+                    path.Stroke = Tools.GlobalParameters.DielectricStrokeColor;
+                    break;
+
+                case Tools.GlobalParameters.EMaterialType.conductor:
+                    path.Fill = Tools.GlobalParameters.ConductorFillColor;
+                    path.Stroke = Tools.GlobalParameters.ConductorStrokeColor;
+                    break;
+            }
 
             RectangleGeometry rectangle = new RectangleGeometry();
             rectangle.Rect = new System.Windows.Rect(new System.Windows.Point(_x, _y), new System.Windows.Point(_x + _width, _y - _height));
@@ -81,13 +109,27 @@ namespace NBPF.Blueprint
             // Draw dimension lines
             if (_showWidthDimensionLines)
             {
-                _widthDimensionLines = new BPDimensionLines(_x, _y - _height, _x + _width, _y - _height);
+                if(_isWidthDimensionLinesUp)
+                {
+                    _widthDimensionLines = new BPDimensionLines(_x, -1.0f * _y + _height, _x + _width, -1.0f * _y + _height);
+                }
+                else
+                {
+                    _widthDimensionLines = new BPDimensionLines(_x, -1.0f * _y, _x + _width, -1.0f * _y);
+                }
                 _drawElements.Add(_widthDimensionLines.DrawLayer);
             }
 
             if (_showHeightDimensionLines)
             {
-                _heightDimensionLines = new BPDimensionLines(_x + _width, _y, _x + _width, _y - _height);
+                if(_isHeightDimensionLinesRight)
+                {
+                    _heightDimensionLines = new BPDimensionLines(_x + _width, -1.0f * _y, _x + _width, -1.0f * _y + _height);
+                }
+                else
+                {
+                    _heightDimensionLines = new BPDimensionLines(_x, -1.0f * _y, _x, -1.0f * _y + _height);
+                }
                 _drawElements.Add(_heightDimensionLines.DrawLayer);
             }
         }

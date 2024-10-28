@@ -34,8 +34,8 @@ namespace NBPF.Blueprint
         }
         public float Y1
         {
-            get { return _y1; }
-            set { _y1 = value; base.Update(); }
+            get { return -1.0f * _y1; }
+            set { _y1 = -1.0f * value; base.Update(); }
         }
         public float X2
         {
@@ -44,8 +44,8 @@ namespace NBPF.Blueprint
         }
         public float Y2
         {
-            get { return _y2; }
-            set { _y2 = value; base.Update(); }
+            get { return -1.0f * _y2; }
+            set { _y2 = -1.0f * value; base.Update(); }
         }
         public float Length
         {
@@ -91,7 +91,7 @@ namespace NBPF.Blueprint
             Line l3 = new Line();
             Polygon arrow1 = new Polygon();
             Polygon arrow2 = new Polygon();
-            TextBlock descrition = new TextBlock();
+            BPText text = new BPText();
 
             l1.Stroke = Tools.GlobalParameters.DimensionLineStrokeColor;
             l2.Stroke = Tools.GlobalParameters.DimensionLineStrokeColor;
@@ -101,9 +101,8 @@ namespace NBPF.Blueprint
             l3.StrokeThickness = Tools.GlobalParameters.DimentionLinesStrokeThickness;
             arrow1.Fill = Tools.GlobalParameters.DimensionLineStrokeColor;
             arrow2.Fill = Tools.GlobalParameters.DimensionLineStrokeColor;
-            descrition.Text = (_descriptionValue == "") ? _descriptionText : _descriptionText + " = " + _descriptionValue;
-            descrition.Foreground = Tools.GlobalParameters.DimensionLineStrokeColor;
-            descrition.FontSize = Tools.GlobalParameters.WorkspaceFontSize;
+            text.DescriptionText = _descriptionText;
+            text.DescriptionValue = _descriptionValue;
 
             l1.X1 = _x1;
             l1.Y1 = _y1;
@@ -114,10 +113,6 @@ namespace NBPF.Blueprint
             if (_length == 0.0f) bufferGap = 0.0f;
             else if (_length > 0.0f) bufferGap = -1.0f * _gap;
             else bufferGap = _gap;
-
-            Size mesureSize = new Size(1000, 1000);
-            descrition.Measure(mesureSize);
-            Size descriptionSize = descrition.DesiredSize;
 
             if (_y1 == _y2)
             {
@@ -144,8 +139,8 @@ namespace NBPF.Blueprint
                         new Point(l3.X2 - _arrowSize, l3.Y2 - _arrowSize / 2.0f)
                     };
 
-                Canvas.SetLeft(descrition, l3.X1 + Math.Abs(l3.X2 - l3.X1) / 2.0f - descriptionSize.Width / 2.0f);
-                Canvas.SetTop(descrition, l3.Y1 - descriptionSize.Height - _descriptionGap);
+                text.X = (float)(l3.X1 + Math.Abs(l3.X2 - l3.X1) / 2.0f - text.Width / 2.0f);
+                text.Y = (float)(-1.0f * l3.Y1 + text.Height + _descriptionGap);
             }
 
             if (_x1 == _x2)
@@ -176,13 +171,13 @@ namespace NBPF.Blueprint
 
                 if (_length >= 0.0f)
                 {
-                    Canvas.SetLeft(descrition, l3.X1 + _descriptionGap);
-                    Canvas.SetTop(descrition, l3.Y1 - Math.Abs(l3.Y2 - l3.Y1) / 2.0f - descriptionSize.Height / 1.6f);
+                    text.X = (float)(l3.X1 + _descriptionGap);
+                    text.Y = (float)(-1.0f * l3.Y1 + Math.Abs(l3.Y2 - l3.Y1) / 2.0f + text.Height / 1.6f);
                 }
                 else
                 {
-                    Canvas.SetLeft(descrition, l3.X1 - descriptionSize.Width - _descriptionGap);
-                    Canvas.SetTop(descrition, l3.Y1 - Math.Abs(l3.Y2 - l3.Y1) / 2.0f - descriptionSize.Height / 1.6f);
+                    text.X = (float)(l3.X1 - text.Width - _descriptionGap);
+                    text.Y = (float)(-1.0f * l3.Y1 + Math.Abs(l3.Y2 - l3.Y1) / 2.0f + text.Height / 1.6f);
                 }
             }
 
@@ -192,7 +187,7 @@ namespace NBPF.Blueprint
             _drawElements.Add(l3);
             _drawElements.Add(arrow1);
             _drawElements.Add(arrow2);
-            _drawElements.Add(descrition);
+            _drawElements.Add(text.DrawLayer);
         }
         #endregion
     }

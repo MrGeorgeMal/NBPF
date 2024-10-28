@@ -67,9 +67,10 @@ namespace NBPF.Tools
         public static Brush ConductorFillColor = Brushes.Orange;
         public static Brush DielectricStrokeColor = Brushes.DarkGreen;
         public static Brush DielectricFillColor = Brushes.Green;
+        public static Brush ScreenFillColor = Brushes.White;
         public static Brush WorkspaceFontColor = Brushes.White;
-        public static float WorkspaceFontSize = 30.0f;
-        public static float RectangleStrokeThickness = 5.0f;
+        public static float WorkspaceFontSize = 20.0f;
+        public static float RectangleStrokeThickness = 2.0f;
         public static float DimentionLinesStrokeThickness = 1.0f;
         #endregion
     }

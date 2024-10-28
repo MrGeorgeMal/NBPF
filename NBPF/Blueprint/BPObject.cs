@@ -34,8 +34,8 @@ namespace NBPF.Blueprint
         }
         public float Y
         {
-            get { return _y; }
-            set { _y = value; Update(); }
+            get { return -1 * _y; }
+            set { _y = -1 * value; Update(); }
         }
         public Canvas DrawLayer { get { return _drawLayer; } }
         #endregion

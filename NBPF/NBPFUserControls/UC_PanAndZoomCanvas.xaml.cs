@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -50,6 +51,22 @@ namespace NBPF.UserControls
             MouseWheel += PanAndZoomCanvas_MouseWheel;
 
             BackgroundColor = _backgroundColor;
+
+            
+            Loaded += (object sender, RoutedEventArgs e) =>
+            {
+                Matrix offsetMatrix;
+                offsetMatrix.OffsetX = ActualWidth / 2.0f;
+                offsetMatrix.OffsetY = ActualHeight / 2.0f;
+
+                _transform.Matrix = offsetMatrix;
+                Debug.WriteLine("M11: " + _transform.Matrix.M11);
+                Debug.WriteLine("M12: " + _transform.Matrix.M12);
+                Debug.WriteLine("M21: " + _transform.Matrix.M21);
+                Debug.WriteLine("M22: " + _transform.Matrix.M22);
+                Debug.WriteLine("OffsetX: " + _transform.Matrix.OffsetX);
+                Debug.WriteLine("OffsetY: " + _transform.Matrix.OffsetY);
+            };
         }
 
         private void PanAndZoomCanvas_MouseDown(object sender, MouseButtonEventArgs e)
@@ -110,6 +127,12 @@ namespace NBPF.UserControls
 
                 child.RenderTransform = _transform;
             }
+        }
+
+        private void Canvas_Loaded(object? sender, EventArgs e)
+        {
+            Debug.WriteLine(this.Width);
+            Debug.WriteLine(this.Height);
         }
     }
 }
