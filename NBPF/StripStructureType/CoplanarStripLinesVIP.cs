@@ -333,14 +333,14 @@ namespace NBPF.StripStructure
             {
                 _e1 = value;
                 _textE1.DescriptionValue = _uc_e1.Value.Text;
-                _textE1.X = (float)(_screen.Width - _textE1.Width - 5.0f);
-                _textE1.Y = (float)(_strip6.Y / 2.0f + _textE1.Height / 2.0f);
+                _textE1.X = (float)(_screen.X + _screen.Width - _textE1.Width - 5.0f);
+                _textE1.Y = (float)(_screen.Y + (_strip6.Y - _screen.Y) / 2.0f + _textE1.Height / 2.0f);
             }
             if (sender == _uc_e2)
             {
                 _e2 = value;
                 _textE2.DescriptionValue = _uc_e2.Value.Text;
-                _textE2.X = (float)(_screen.Width - _textE2.Width - 5.0f);
+                _textE2.X = (float)(_screen.X + _screen.Width - _textE2.Width - 5.0f);
                 _textE2.Y = (float)(_dielectric1.Y + _dielectric1.Height / 2.0f + _textE2.Height / 2.0f);
             }
             if (sender == _uc_e3)
@@ -354,8 +354,8 @@ namespace NBPF.StripStructure
             {
                 _e4 = value;
                 _textE4.DescriptionValue = _uc_e4.Value.Text;
-                _textE4.X = (float)(_screen.Width - _textE4.Width - 5.0f);
-                _textE4.Y = (float)(_screen.Height - 5.0f);
+                _textE4.X = (float)(_screen.X + _screen.Width - _textE4.Width - 5.0f);
+                _textE4.Y = (float)(_screen.Y + _screen.Height - 5.0f);
             }
         }
         #endregion
