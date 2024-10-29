@@ -47,12 +47,12 @@ namespace NBPF.StripStructure
         BPScreen? _screen;
         BPRectangle? _dielectric1;
         BPRectangle? _dielectric2;
-        BPRectangle? _strip1;
-        BPRectangle? _strip2;
-        BPRectangle? _strip3;
-        BPRectangle? _strip4;
-        BPRectangle? _strip5;
-        BPRectangle? _strip6;
+        BPLine? _strip1;
+        BPLine? _strip2;
+        BPLine? _strip3;
+        BPLine? _strip4;
+        BPLine? _strip5;
+        BPLine? _strip6;
         BPDimensionLines? _dimentionLineH1;
         BPDimensionLines? _dimentionLineH4;
         BPDimensionLines? _dimentionLineD;
@@ -156,61 +156,55 @@ namespace NBPF.StripStructure
             _dielectric2.WidthDimensionLines.DescriptionValue = _uc_h3.Value.Text;
             _dielectric2.HeightDimensionLines.DescriptionValue = _uc_w2.Value.Text;
 
-            _strip1 = new BPRectangle();
-            _strip1.Width = 20;
-            _strip1.Height = _dielectric2.Height;
-            _strip1.X = _dielectric2.X - _strip1.Width;
-            _strip1.Y = _dielectric2.Y;
-            _strip1.Material = Tools.GlobalParameters.EMaterialType.conductor;
-            _strip1.ShowWidthDimensionLines = false;
-            _strip1.ShowHeightDimensionLines = false;
+            _strip1 = new BPLine();
+            _strip1.X1 = _dielectric2.X;
+            _strip1.Y1 = _dielectric2.Y;
+            _strip1.X2 = _strip1.X1;
+            _strip1.Y2 = _dielectric2.Y + _dielectric2.Height;
+            _strip1.StrokePosition = Tools.GlobalParameters.EBPLinePosition.left;
+            _strip1.ShowDimensionLinesLeft = false;
 
-            _strip2 = new BPRectangle();
-            _strip2.Width = 100;
-            _strip2.Height = 20;
-            _strip2.X = _dielectric2.X - _strip1.Width - _strip2.Width;
-            _strip2.Y = _dielectric2.Y;
-            _strip2.Material = Tools.GlobalParameters.EMaterialType.conductor;
-            _strip2.ShowHeightDimensionLines = false;
-            _strip2.WidthDimensionLines.DescriptionText = "w1";
-            _strip2.WidthDimensionLines.DescriptionValue = _uc_w1.Value.Text;
+            _strip2 = new BPLine();
+            _strip2.X1 = _strip1.X1 - _strip1.Thickness;
+            _strip2.Y1 = _dielectric2.Y;
+            _strip2.X2 = _strip2.X1 - 100;
+            _strip2.Y2 = _dielectric2.Y;
+            _strip2.StrokePosition = Tools.GlobalParameters.EBPLinePosition.left;
+            _strip2.DimensionLines.DescriptionText = "w1";
+            _strip2.DimensionLines.DescriptionValue = _uc_w1.Value.Text;
 
-            _strip3 = new BPRectangle();
-            _strip3.Width = 20;
-            _strip3.Height = _dielectric2.Height;
-            _strip3.X = _dielectric2.X + _dielectric2.Width;
-            _strip3.Y = _dielectric2.Y;
-            _strip3.Material = Tools.GlobalParameters.EMaterialType.conductor;
-            _strip3.ShowWidthDimensionLines = false;
-            _strip3.ShowHeightDimensionLines = false;
+            _strip3 = new BPLine();
+            _strip3.X1 = _dielectric2.X + _dielectric2.Width;
+            _strip3.Y1 = _dielectric2.Y;
+            _strip3.X2 = _strip3.X1;
+            _strip3.Y2 = _dielectric2.Y + _dielectric2.Height;
+            _strip3.StrokePosition = Tools.GlobalParameters.EBPLinePosition.right;
+            _strip3.ShowDimensionLinesLeft = false;
 
-            _strip4 = new BPRectangle();
-            _strip4.Width = 100;
-            _strip4.Height = 20;
-            _strip4.X = _dielectric2.X + _dielectric2.Width + _strip3.Width;
-            _strip4.Y = _dielectric2.Y;
-            _strip4.Material = Tools.GlobalParameters.EMaterialType.conductor;
-            _strip4.ShowHeightDimensionLines = false;
-            _strip4.WidthDimensionLines.DescriptionText = "w1";
-            _strip4.WidthDimensionLines.DescriptionValue = _uc_w1.Value.Text;
+            _strip4 = new BPLine();
+            _strip4.X1 = _strip3.X1 + _strip3.Thickness;
+            _strip4.Y1 = _dielectric2.Y;
+            _strip4.X2 = _strip4.X1 + 100;
+            _strip4.Y2 = _dielectric2.Y;
+            _strip4.StrokePosition = Tools.GlobalParameters.EBPLinePosition.left;
+            _strip4.DimensionLines.DescriptionText = "w1";
+            _strip4.DimensionLines.DescriptionValue = _uc_w1.Value.Text;
 
-            _strip5 = new BPRectangle();
-            _strip5.Width = _dielectric1.Width / 2.0f - 30.0f;
-            _strip5.Height = 20;
-            _strip5.X = _screen.X;
-            _strip5.Y = _dielectric1.Y - _strip5.Height;
-            _strip5.Material = Tools.GlobalParameters.EMaterialType.conductor;
-            _strip5.ShowWidthDimensionLines = false;
-            _strip5.ShowHeightDimensionLines = false;
+            _strip5 = new BPLine();
+            _strip5.X1 = _screen.X;
+            _strip5.Y1 = _dielectric1.Y;
+            _strip5.X2 = _strip5.X1 + _screen.Width / 2.0f - 40.0f;
+            _strip5.Y2 = _dielectric1.Y;
+            _strip5.StrokePosition = Tools.GlobalParameters.EBPLinePosition.right;
+            _strip5.ShowDimensionLinesLeft = false;
 
-            _strip6 = new BPRectangle();
-            _strip6.Width = _dielectric1.Width / 2.0f - 30.0f;
-            _strip6.Height = 20;
-            _strip6.X = _strip5.X + _strip5.Width + 60.0f;
-            _strip6.Y = _dielectric1.Y - _strip6.Height;
-            _strip6.Material = Tools.GlobalParameters.EMaterialType.conductor;
-            _strip6.ShowWidthDimensionLines = false;
-            _strip6.ShowHeightDimensionLines = false;
+            _strip6 = new BPLine();
+            _strip6.X1 = _screen.X + _screen.Width;
+            _strip6.Y1 = _dielectric1.Y;
+            _strip6.X2 = _strip6.X1 - _screen.Width / 2.0f + 40.0f;
+            _strip6.Y2 = _dielectric1.Y;
+            _strip6.StrokePosition = Tools.GlobalParameters.EBPLinePosition.right;
+            _strip6.ShowDimensionLinesLeft = false;
 
             _dimentionLineH1 = new BPDimensionLines(
                 _screen.X + _screen.Width,
@@ -229,10 +223,10 @@ namespace NBPF.StripStructure
             _dimentionLineH4.DescriptionValue = _uc_h4.Value.Text;
 
             _dimentionLineD = new BPDimensionLines(
-                _screen.X + _strip5.Width,
-                _dielectric1.Y - _strip5.Height,
-                _strip6.X,
-                _dielectric1.Y - _strip5.Height);
+                _strip5.X2,
+                _strip5.Y1 - _strip5.Thickness,
+                _strip6.X2,
+                _strip6.Y1 - _strip6.Thickness);
             _dimentionLineD.Length = -50;
             _dimentionLineD.DescriptionText = "d";
             _dimentionLineD.DescriptionValue = _uc_d.Value.Text;
@@ -241,7 +235,7 @@ namespace NBPF.StripStructure
             _textE1.DescriptionText = "\u03B5r1";
             _textE1.DescriptionValue = _uc_e1.Value.Text;
             _textE1.X = (float)(_screen.X + _screen.Width - _textE1.Width - 5.0f);
-            _textE1.Y = (float)(_screen.Y + (_strip6.Y - _screen.Y) / 2.0f + _textE1.Height / 2.0f);
+            _textE1.Y = (float)(_screen.Y + (_strip6.Y1 - _strip6.Thickness - _screen.Y) / 2.0f + _textE1.Height / 2.0f);
 
             _textE2 = new BPText();
             _textE2.DescriptionText = "\u03B5r2";
@@ -250,6 +244,7 @@ namespace NBPF.StripStructure
             _textE2.Y = (float)(_dielectric1.Y + _dielectric1.Height / 2.0f + _textE2.Height / 2.0f);
 
             _textE3 = new BPText();
+            _textE3.SizeBoxWidth = _dielectric2.Width;
             _textE3.DescriptionText = "\u03B5r3";
             _textE3.DescriptionValue = _uc_e3.Value.Text;
             _textE3.X = (float)(_dielectric2.X + _dielectric2.Width / 2.0f - _textE3.Width / 2.0f);
@@ -316,8 +311,8 @@ namespace NBPF.StripStructure
             if (sender == _uc_w1)
             {
                 _w1 = value;
-                _strip2.WidthDimensionLines.DescriptionValue = _uc_w1.Value.Text;
-                _strip4.WidthDimensionLines.DescriptionValue = _uc_w1.Value.Text;
+                _strip2.DimensionLines.DescriptionValue = _uc_w1.Value.Text;
+                _strip4.DimensionLines.DescriptionValue = _uc_w1.Value.Text;
             }
             if (sender == _uc_w2)
             {

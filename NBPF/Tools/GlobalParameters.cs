@@ -58,11 +58,9 @@ namespace NBPF.Tools
             dielectric
         }
 
-        public enum EOutlinePosition
+        public enum EBPLinePosition
         {
             center,
-            top,
-            bottom,
             left,
             right
         }
@@ -72,14 +70,14 @@ namespace NBPF.Tools
 
         #region Public Member
         public static Brush DimensionLineStrokeColor = Brushes.White;
-        public static Brush ConductorStrokeColor = Brushes.Red;
+        public static Brush ConductorStrokeColor = Brushes.Yellow;
         public static Brush ConductorFillColor = Brushes.Orange;
-        public static Brush DielectricStrokeColor = Brushes.DarkGreen;
+        public static Brush DielectricStrokeColor = Brushes.LightGreen;
         public static Brush DielectricFillColor = Brushes.Green;
         public static Brush ScreenFillColor = Brushes.White;
         public static Brush WorkspaceFontColor = Brushes.White;
         public static float WorkspaceFontSize = 20.0f;
-        public static float RectangleStrokeThickness = 2.0f;
+        public static float BPObjectStrokeThickness = 2.0f;
         public static float DimentionLinesStrokeThickness = 1.0f;
         #endregion
     }

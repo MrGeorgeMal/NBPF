@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace NBPF.Blueprint
 {
@@ -83,27 +82,46 @@ namespace NBPF.Blueprint
         protected override void SetupObject()
         {
             // Draw rectangle
-            Path path = new Path();
+            System.Windows.Shapes.Path pathRect = new System.Windows.Shapes.Path();
+            System.Windows.Shapes.Path pathOutline = new System.Windows.Shapes.Path();
+            RectangleGeometry rect = new RectangleGeometry();
+            RectangleGeometry rectInOutline = new RectangleGeometry();
+            RectangleGeometry rectOutOutline = new RectangleGeometry();
+            CombinedGeometry outline = new CombinedGeometry();
 
-            path.StrokeThickness = Tools.GlobalParameters.RectangleStrokeThickness;
             switch (_material)
             {
                 case Tools.GlobalParameters.EMaterialType.dielectric:
-                    path.Fill = Tools.GlobalParameters.DielectricFillColor;
-                    path.Stroke = Tools.GlobalParameters.DielectricStrokeColor;
+                    pathRect.Fill = Tools.GlobalParameters.DielectricFillColor;
+                    pathOutline.Fill = Tools.GlobalParameters.DielectricStrokeColor;
                     break;
-
                 case Tools.GlobalParameters.EMaterialType.conductor:
-                    path.Fill = Tools.GlobalParameters.ConductorFillColor;
-                    path.Stroke = Tools.GlobalParameters.ConductorStrokeColor;
+                    pathRect.Fill = Tools.GlobalParameters.ConductorFillColor;
+                    pathOutline.Fill = Tools.GlobalParameters.ConductorStrokeColor;
                     break;
             }
+            outline.GeometryCombineMode = GeometryCombineMode.Xor;
+            outline.Geometry1 = rectInOutline;
+            outline.Geometry2 = rectOutOutline;
+            pathRect.Data = rect;
+            pathOutline.Data = outline;
 
-            RectangleGeometry rectangle = new RectangleGeometry();
-            rectangle.Rect = new System.Windows.Rect(new System.Windows.Point(_x, _y), new System.Windows.Point(_x + _width, _y - _height));
-            path.Data = rectangle;
+            rect.Rect = new System.Windows.Rect(new System.Windows.Point(_x, _y), new System.Windows.Point(_x + _width, _y - _height));
 
-            _drawElements.Add(path);
+            System.Windows.Point p1;
+            System.Windows.Point p2;
+            float strokeThickness = Tools.GlobalParameters.BPObjectStrokeThickness;
+            float bufferX = _x, bufferY = _y, bufferWidth = _width, bufferHeight = _height;
+            if (_width < 0) { bufferX = _x + _width; bufferWidth *= -1.0f; }
+            if (_height > 0) { bufferY = _y - _height; bufferHeight *= -1.0f; }
+            p1 = new System.Windows.Point(bufferX + strokeThickness, bufferY + strokeThickness);
+            p2 = new System.Windows.Point(bufferX + bufferWidth - strokeThickness, bufferY - bufferHeight - strokeThickness);
+
+            rectOutOutline.Rect = rect.Rect;
+            rectInOutline.Rect = new System.Windows.Rect(p1, p2);
+
+            _drawElements.Add(pathRect);
+            _drawElements.Add(pathOutline);
 
 
             // Draw dimension lines

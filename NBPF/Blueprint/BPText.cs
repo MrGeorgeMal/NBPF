@@ -13,6 +13,7 @@ namespace NBPF.Blueprint
         private TextBlock textBlock = new TextBlock();
         private string _descriptionText = "text";
         private string _descriptionValue = "";
+        private float _sizeBoxWidth = 0.0f;
         #endregion
 
 
@@ -27,6 +28,11 @@ namespace NBPF.Blueprint
         {
             get { return _descriptionValue; }
             set { _descriptionValue = value; Update(); }
+        }
+        public float SizeBoxWidth
+        {
+            get { return _sizeBoxWidth; }
+            set { _sizeBoxWidth = value; Update(); }
         }
         public double Width
         {
@@ -72,10 +78,37 @@ namespace NBPF.Blueprint
             textBlock.Foreground = Tools.GlobalParameters.WorkspaceFontColor;
             textBlock.FontSize = Tools.GlobalParameters.WorkspaceFontSize;
 
+            if (!CheckFitInSizeBox()) ChangeFontSizeUderSizeBox();
+
             Canvas.SetLeft(textBlock, _x);
             Canvas.SetTop(textBlock, _y);
 
             _drawElements.Add(textBlock);
+        }
+        #endregion
+
+
+
+        #region Private Member
+        /*
+         * Check if textBox fit in Size Box
+         */
+        private bool CheckFitInSizeBox()
+        {
+            if (_sizeBoxWidth == 0) return true;
+            else
+            {
+                if(Width > _sizeBoxWidth) return false;
+                else return true;
+            }
+        }
+
+        /*
+         * Method for change font size under size box
+         */
+        private void ChangeFontSizeUderSizeBox()
+        {
+            textBlock.FontSize *= Math.Abs((_sizeBoxWidth * 70 / 100) / Width);
         }
         #endregion
     }

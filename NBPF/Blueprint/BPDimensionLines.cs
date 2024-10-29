@@ -101,8 +101,6 @@ namespace NBPF.Blueprint
             l3.StrokeThickness = Tools.GlobalParameters.DimentionLinesStrokeThickness;
             arrow1.Fill = Tools.GlobalParameters.DimensionLineStrokeColor;
             arrow2.Fill = Tools.GlobalParameters.DimensionLineStrokeColor;
-            text.DescriptionText = _descriptionText;
-            text.DescriptionValue = _descriptionValue;
 
             l1.X1 = _x1;
             l1.Y1 = _y1;
@@ -139,6 +137,9 @@ namespace NBPF.Blueprint
                         new Point(l3.X2 - _arrowSize, l3.Y2 - _arrowSize / 2.0f)
                     };
 
+                text.SizeBoxWidth = (float)(l3.X2 - l3.X1);
+                text.DescriptionText = _descriptionText;
+                text.DescriptionValue = _descriptionValue;
                 text.X = (float)(l3.X1 + Math.Abs(l3.X2 - l3.X1) / 2.0f - text.Width / 2.0f);
                 text.Y = (float)(-1.0f * l3.Y1 + text.Height + _descriptionGap);
             }
@@ -169,6 +170,8 @@ namespace NBPF.Blueprint
                         new Point(l3.X2 - _arrowSize / 2.0f, l3.Y2 + _arrowSize)
                     };
 
+                text.DescriptionText = _descriptionText;
+                text.DescriptionValue = _descriptionValue;
                 if (_length >= 0.0f)
                 {
                     text.X = (float)(l3.X1 + _descriptionGap);
