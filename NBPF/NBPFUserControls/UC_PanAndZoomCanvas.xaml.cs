@@ -58,14 +58,7 @@ namespace NBPF.UserControls
                 Matrix offsetMatrix;
                 offsetMatrix.OffsetX = ActualWidth / 2.0f;
                 offsetMatrix.OffsetY = ActualHeight / 2.0f;
-
                 _transform.Matrix = offsetMatrix;
-                Debug.WriteLine("M11: " + _transform.Matrix.M11);
-                Debug.WriteLine("M12: " + _transform.Matrix.M12);
-                Debug.WriteLine("M21: " + _transform.Matrix.M21);
-                Debug.WriteLine("M22: " + _transform.Matrix.M22);
-                Debug.WriteLine("OffsetX: " + _transform.Matrix.OffsetX);
-                Debug.WriteLine("OffsetY: " + _transform.Matrix.OffsetY);
             };
         }
 
@@ -111,8 +104,6 @@ namespace NBPF.UserControls
             Matrix scaleMatrix = _transform.Matrix;
             scaleMatrix.ScaleAt(scaleFactor, scaleFactor, mousePostion.X, mousePostion.Y);
             _transform.Matrix = scaleMatrix;
-
-            Debug.WriteLine(_transform.Matrix.M11);
 
             foreach (UIElement child in this.Children)
             {

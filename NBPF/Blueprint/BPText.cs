@@ -108,7 +108,7 @@ namespace NBPF.Blueprint
          */
         private void ChangeFontSizeUderSizeBox()
         {
-            textBlock.FontSize *= Math.Abs((_sizeBoxWidth * 70 / 100) / Width);
+            textBlock.FontSize *= Math.Abs((_sizeBoxWidth * 90 / 100) / Width);
         }
         #endregion
     }
