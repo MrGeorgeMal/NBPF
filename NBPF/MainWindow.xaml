@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="2*"/>
@@ -65,10 +65,10 @@
             <TextBlock Foreground="White" Text="Статус"/>
         </StatusBar>
 
-        <Frame x:Name="FrameProjectTree" Grid.Column="0" Grid.Row="2" Content="{Binding PageProjectTree}"/>
+        <Frame x:Name="FrameProjectTree" Margin="10" Grid.Column="0" Grid.Row="2" Content="{Binding PageProjectTree}"/>
         <Frame x:Name="FrameWorkspace" Grid.Column="2" Grid.Row="2" Grid.RowSpan="3" Content="{Binding PageWorkspace}"/>
-        <Frame x:Name="FrameProperties" Grid.Column="4" Grid.Row="2" Grid.RowSpan="3" Content="{Binding PageProperties}"/>
-        <Frame x:Name="FrameOutputData" Grid.Column="0"  Grid.Row="4" Content="{Binding PageOutputData}"/>
+        <Frame x:Name="FrameProperties" Margin="10" Grid.Column="4" Grid.Row="2" Grid.RowSpan="3" Content="{Binding PageProperties}"/>
+        <Frame x:Name="FrameOutputData" Margin="10" Grid.Column="0"  Grid.Row="4" Content="{Binding PageOutputData}"/>
     </Grid>
 
 </Window>
