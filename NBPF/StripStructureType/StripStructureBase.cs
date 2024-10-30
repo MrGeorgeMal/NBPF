@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NBPF.Blueprint;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace NBPF.StripStructureType
         #region Protected Member
         protected List<UserControl> _userControls = new List<UserControl>();
         protected List<UIElement> _workspaceElements = new List<UIElement>();
+        protected List<BPObject> _stripObjects = new List<BPObject>();
         #endregion
 
 
@@ -20,6 +22,7 @@ namespace NBPF.StripStructureType
         #region Public Member
         public List<UserControl> UserControls { get { return _userControls; } }
         public List<UIElement> WorkspaceElements { get { return _workspaceElements; } }
+        public List<BPObject> StripObjects { get { return _stripObjects; } }
         #endregion
 
 

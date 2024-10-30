@@ -5,6 +5,7 @@ using NBPF.StripStructureType;
 using NBPF.UserControls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -73,18 +74,31 @@ namespace NBPF.StripStructure
         #region Protected Method
         protected override void SetupStripStructure()
         {
-            _uc_a = new UC_InputBox("1");
-            _uc_h1 = new UC_InputBox("2");
-            _uc_h2 = new UC_InputBox("3");
-            _uc_h3 = new UC_InputBox("4");
-            _uc_h4 = new UC_InputBox("5");
-            _uc_w1 = new UC_InputBox("6");
-            _uc_w2 = new UC_InputBox("7");
-            _uc_d = new UC_InputBox("8");
-            _uc_e1 = new UC_InputBox("9");
-            _uc_e2 = new UC_InputBox("10");
-            _uc_e3 = new UC_InputBox("11");
-            _uc_e4 = new UC_InputBox("12");
+            _uc_a = new UC_InputBox("24");
+            _uc_h1 = new UC_InputBox("1");
+            _uc_h2 = new UC_InputBox("1.5");
+            _uc_h3 = new UC_InputBox("0.5");
+            _uc_h4 = new UC_InputBox("8");
+            _uc_w1 = new UC_InputBox("0.7");
+            _uc_w2 = new UC_InputBox("2");
+            _uc_d = new UC_InputBox("0");
+            _uc_e1 = new UC_InputBox("1");
+            _uc_e2 = new UC_InputBox("4.5");
+            _uc_e3 = new UC_InputBox("3");
+            _uc_e4 = new UC_InputBox("1");
+
+            _a = Tools.TextManager.StringToNumber(_uc_a.Value.Text);
+            _h1 = Tools.TextManager.StringToNumber(_uc_h1.Value.Text);
+            _h2 = Tools.TextManager.StringToNumber(_uc_h2.Value.Text);
+            _h3 = Tools.TextManager.StringToNumber(_uc_h3.Value.Text);
+            _h4 = Tools.TextManager.StringToNumber(_uc_h4.Value.Text);
+            _w1 = Tools.TextManager.StringToNumber(_uc_w1.Value.Text);
+            _w2 = Tools.TextManager.StringToNumber(_uc_w2.Value.Text);
+            _d = Tools.TextManager.StringToNumber(_uc_d.Value.Text);
+            _e1 = Tools.TextManager.StringToNumber(_uc_e1.Value.Text);
+            _e2 = Tools.TextManager.StringToNumber(_uc_e2.Value.Text);
+            _e3 = Tools.TextManager.StringToNumber(_uc_e3.Value.Text);
+            _e4 = Tools.TextManager.StringToNumber(_uc_e4.Value.Text);
 
             _uc_a.Description.Text = "(a) Ширина структуры";
             _uc_h1.Description.Text = "(h1) Расстояние от экрана до горизонтальной подложки";
@@ -256,6 +270,8 @@ namespace NBPF.StripStructure
             _textE4.X = (float)(_screen.X + _screen.Width - _textE4.Width - 5.0f);
             _textE4.Y = (float)(_screen.Y + _screen.Height - 5.0f);
 
+
+
             _workspaceElements.Add(_dielectric1.DrawLayer);
             _workspaceElements.Add(_dielectric2.DrawLayer);
             _workspaceElements.Add(_strip1.DrawLayer);
@@ -272,12 +288,80 @@ namespace NBPF.StripStructure
             _workspaceElements.Add(_textE3.DrawLayer);
             _workspaceElements.Add(_textE4.DrawLayer);
             _workspaceElements.Add(_screen.DrawLayer);
+
+
+
+            _stripObjects.Add(_screen);
+            _stripObjects.Add(_dielectric1);
+            _stripObjects.Add(_dielectric2);
+            _stripObjects.Add(_strip1);
+            _stripObjects.Add(_strip2);
+            _stripObjects.Add(_strip3);
+            _stripObjects.Add(_strip4);
+            _stripObjects.Add(_strip5);
+            _stripObjects.Add(_strip6);
+
+            UpdateActualSize();
         }
         #endregion
 
 
 
         #region Private Method
+        /*
+         * Method for update Actual size to BPObjects
+         */
+        private void UpdateActualSize()
+        {
+            _screen.ActualX = 0;
+            _screen.ActualY = 0;
+            _screen.ActualWidth = (float)_a;
+            _screen.ActualHeight = (float)(_h1 + _h2 + _w2 + _h4);
+
+            _dielectric1.ActualX = _dielectric1.X - _screen.X;
+            _dielectric1.ActualY = (float)(_screen.ActualY + _h1);
+            _dielectric1.ActualWidth = _screen.ActualWidth;
+            _dielectric1.ActualHeight = (float)_h2;
+
+            _dielectric2.ActualX = (float)(_dielectric1.ActualWidth / 2.0f - _h3 / 2.0f);
+            _dielectric2.ActualY = (float)(_screen.ActualY + _h1 + _h2);
+            _dielectric2.ActualWidth = (float)_h3;
+            _dielectric2.ActualHeight = (float)_w2;
+
+            _strip1.ActualX1 = _dielectric2.ActualX;
+            _strip1.ActualY1 = _dielectric2.ActualY;
+            _strip1.ActualX2 = _dielectric2.ActualX;
+            _strip1.ActualY2 = (float)(_dielectric2.ActualY + _w2);
+
+            _strip2.ActualX1 = (float)(_dielectric2.ActualX - _w1);
+            _strip2.ActualY1 = _dielectric2.ActualY;
+            _strip2.ActualX2 = _dielectric2.ActualX;
+            _strip2.ActualY2 = _dielectric2.ActualY;
+
+            _strip3.ActualX1 = (float)(_dielectric2.ActualX + _h3);
+            _strip3.ActualY1 = _dielectric2.ActualY;
+            _strip3.ActualX2 = (float)(_dielectric2.ActualX + _h3);
+            _strip3.ActualY2 = (float)(_dielectric2.ActualY + _w2);
+
+            _strip4.ActualX1 = (float)(_dielectric2.ActualX + _h3);
+            _strip4.ActualY1 = _dielectric2.ActualY;
+            _strip4.ActualX2 = (float)(_strip4.ActualX1 + _w1);
+            _strip4.ActualY2 = _dielectric2.ActualY;
+
+            _strip5.ActualX1 = _screen.ActualX;
+            _strip5.ActualY1 = _dielectric1.ActualY;
+            _strip5.ActualX2 = (float)(_strip5.ActualX1 + _a / 2.0f - _d / 2.0f);
+            _strip5.ActualY2 = _dielectric1.ActualY;
+
+            _strip6.ActualX1 = (float)(_screen.ActualX + _a);
+            _strip6.ActualY1 = _dielectric1.ActualY;
+            _strip6.ActualX2 = (float)(_strip6.ActualX1 - _a / 2.0f + _d / 2.0f);
+            _strip6.ActualY2 = _dielectric1.ActualY;
+
+            _dielectric1.DielectricPermittivity = (double)_e2;
+            _dielectric2.DielectricPermittivity = (double)_e3;
+        }
+
         /*
          * Event handling when InputBox's value changed
          */
@@ -287,42 +371,50 @@ namespace NBPF.StripStructure
             {
                 _a = value;
                 _dielectric1.WidthDimensionLines.DescriptionValue = _uc_a.Value.Text;
+                UpdateActualSize();
             }
             if (sender == _uc_h1)
             {
                 _h1 = value;
                 _dimentionLineH1.DescriptionValue = _uc_h1.Value.Text;
+                UpdateActualSize();
             }
             if (sender == _uc_h2)
             {
                 _h2 = value;
                 _dielectric1.HeightDimensionLines.DescriptionValue = _uc_h2.Value.Text;
+                UpdateActualSize();
             }
             if (sender == _uc_h3)
             {
                 _h3 = value;
                 _dielectric2.WidthDimensionLines.DescriptionValue = _uc_h3.Value.Text;
+                UpdateActualSize();
             }
             if (sender == _uc_h4)
             {
                 _h4 = value;
                 _dimentionLineH4.DescriptionValue = _uc_h4.Value.Text;
+                UpdateActualSize();
             }
             if (sender == _uc_w1)
             {
                 _w1 = value;
                 _strip2.DimensionLines.DescriptionValue = _uc_w1.Value.Text;
                 _strip4.DimensionLines.DescriptionValue = _uc_w1.Value.Text;
+                UpdateActualSize();
             }
             if (sender == _uc_w2)
             {
                 _w2 = value;
                 _dielectric2.HeightDimensionLines.DescriptionValue = _uc_w2.Value.Text;
+                UpdateActualSize();
             }
             if (sender == _uc_d)
             {
                 _d = value;
                 _dimentionLineD.DescriptionValue = _uc_d.Value.Text;
+                UpdateActualSize();
             }
             if (sender == _uc_e1)
             {
@@ -337,6 +429,7 @@ namespace NBPF.StripStructure
                 _textE2.DescriptionValue = _uc_e2.Value.Text;
                 _textE2.X = (float)(_screen.X + _screen.Width - _textE2.Width - 5.0f);
                 _textE2.Y = (float)(_dielectric1.Y + _dielectric1.Height / 2.0f + _textE2.Height / 2.0f);
+                _dielectric1.DielectricPermittivity = (double)_e2;
             }
             if (sender == _uc_e3)
             {
@@ -344,6 +437,7 @@ namespace NBPF.StripStructure
                 _textE3.DescriptionValue = _uc_e3.Value.Text;
                 _textE3.X = (float)(_dielectric2.X + _dielectric2.Width / 2.0f - _textE3.Width / 2.0f);
                 _textE3.Y = (float)(_dielectric2.Y + _dielectric2.Height / 2.0f + _textE3.Height / 2.0f);
+                _dielectric2.DielectricPermittivity = (double)_e3;
             }
             if (sender == _uc_e4)
             {

@@ -13,6 +13,8 @@ namespace NBPF.Blueprint
         #region Private Member
         private float _width = 100;
         private float _height = 100;
+        private float _actualWidth = 10.0f;
+        private float _actualHeight = 10.0f;
         private BPDimensionLines _widthDimensionLines;
         private BPDimensionLines _heightDimensionLines;
         private bool _showWidthDimensionLines = true;
@@ -20,6 +22,8 @@ namespace NBPF.Blueprint
         private bool _isWidthDimensionLinesUp = true;
         private bool _isHeightDimensionLinesRight = true;
         private Tools.GlobalParameters.EMaterialType _material = Tools.GlobalParameters.EMaterialType.dielectric;
+        private double _dielectricPermittivity = 1.0;
+        private double _potential = 0.0;
         #endregion
 
 
@@ -34,6 +38,16 @@ namespace NBPF.Blueprint
         {
             get { return _height; }
             set { _height = value; base.Update(); }
+        }
+        public float ActualWidth
+        {
+            get { return _actualWidth; }
+            set { _actualWidth = value; }
+        }
+        public float ActualHeight
+        {
+            get { return _actualHeight; }
+            set { _actualHeight = value; }
         }
         public BPDimensionLines WidthDimensionLines
         {
@@ -67,6 +81,16 @@ namespace NBPF.Blueprint
         {
             get { return _material; }
             set { _material = value; Update(); }
+        }
+        public double DielectricPermittivity
+        {
+            get { return _dielectricPermittivity; }
+            set { _dielectricPermittivity = value; }
+        }
+        public double Potential
+        {
+            get { return _potential; }
+            set { _potential = value; }
         }
         #endregion
 

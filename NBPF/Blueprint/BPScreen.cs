@@ -14,6 +14,8 @@ namespace NBPF.Blueprint
         #region Private Member
         private float _width = 100.0f;
         private float _height = 100.0f;
+        private float _actualWidth = 10.0f;
+        private float _actualHeight = 10.0f;
         private float _thickness = 20.0f;
         #endregion
 
@@ -29,6 +31,16 @@ namespace NBPF.Blueprint
         {
             get { return _height; }
             set { _height = value; Update(); }
+        }
+        public float ActualWidth
+        {
+            get { return _actualWidth; }
+            set { _actualWidth = value; }
+        }
+        public float ActualHeight
+        {
+            get { return _actualHeight; }
+            set { _actualHeight = value; }
         }
         #endregion
 

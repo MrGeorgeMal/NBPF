@@ -12,11 +12,17 @@ namespace NBPF.Blueprint
         #region Private Member
         private float _x1 = 0.0f;
         private float _y1 = 0.0f;
-        private float _x2 = 100.0f;
+        private float _x2 = 0.0f;
         private float _y2 = 100.0f;
+        private float _actualX1 = 0.0f;
+        private float _actualY1 = 0.0f;
+        private float _actualX2 = 0.0f;
+        private float _actualY2 = 10.0f;
         private float _thickess = 20.0f;
         private Tools.GlobalParameters.EBPLinePosition _linePosition = Tools.GlobalParameters.EBPLinePosition.center;
         private Tools.GlobalParameters.EMaterialType _material = Tools.GlobalParameters.EMaterialType.conductor;
+        private double _dielectricPermittivity = 1.0;
+        private double _potential = 1.0;
         private BPDimensionLines _dimensionLines;
         private bool _showDimensionLines = true;
         private bool _isDimensionLinesLeft = true;
@@ -45,6 +51,26 @@ namespace NBPF.Blueprint
             get { return -1.0f * _y2; }
             set { _y2 = -1.0f * value; Update(); }
         }
+        public float ActualX1
+        {
+            get { return _actualX1; }
+            set { _actualX1 = value; }
+        }
+        public float ActualY1
+        {
+            get { return _actualY1; }
+            set { _actualY1 = value; }
+        }
+        public float ActualX2
+        {
+            get { return _actualX2; }
+            set { _actualX2 = value; }
+        }
+        public float ActualY2
+        {
+            get { return _actualY2; }
+            set { _actualY2 = value; }
+        }
         public Tools.GlobalParameters.EBPLinePosition StrokePosition
         {
             get { return _linePosition; }
@@ -54,6 +80,16 @@ namespace NBPF.Blueprint
         {
             get { return _material; }
             set { _material = value; Update(); }
+        }
+        public double DielectricPermittivity
+        {
+            get { return _dielectricPermittivity; }
+            set { _dielectricPermittivity = value; }
+        }
+        public double Potential
+        {
+            get { return _potential; }
+            set { _potential = value; }
         }
         public bool IsDimensionLinesLeft
         {

@@ -18,8 +18,10 @@ namespace NBPF.Blueprint
 
 
         #region Protected Member
-        protected float _x = 0;
-        protected float _y = 0;
+        protected float _x = 0.0f;
+        protected float _y = 0.0f;
+        protected float _actualX = 0.0f;
+        protected float _actualY = 0.0f;
         protected Canvas _drawLayer = new Canvas();
         protected List<UIElement> _drawElements = new List<UIElement>();
         #endregion
@@ -36,6 +38,16 @@ namespace NBPF.Blueprint
         {
             get { return -1 * _y; }
             set { _y = -1 * value; Update(); }
+        }
+        public float ActualX
+        {
+            get { return _actualX; }
+            set { _actualX = value; }
+        }
+        public float ActualY
+        {
+            get { return _actualY; }
+            set { _actualY = value; }
         }
         public Canvas DrawLayer { get { return _drawLayer; } }
         #endregion
