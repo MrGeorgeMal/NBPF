@@ -55,7 +55,8 @@ namespace NBPF.Tools
         public enum EMaterialType
         {
             conductor,
-            dielectric
+            dielectric,
+            none
         }
 
         public enum EBPLinePosition

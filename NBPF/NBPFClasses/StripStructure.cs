@@ -23,6 +23,12 @@ namespace NBPF.NBPFClasses
 
 
 
+        #region Public Member
+        public StripStructureBase StripStucture { get { return _stripStructure; } }
+        #endregion
+
+
+
         #region Constructor
         public StripStructure() { }
         public StripStructure(string name) : base(name) { }

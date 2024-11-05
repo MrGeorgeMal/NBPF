@@ -44,7 +44,7 @@
             </MenuItem>
 
             <MenuItem Header="Инструменты">
-                <MenuItem Header="Запустить анализ"/>
+                <MenuItem x:Name="BtnStartAnalysis" Header="Запустить анализ"/>
                 <MenuItem Header="Запустить синтез"/>
             </MenuItem>
                         

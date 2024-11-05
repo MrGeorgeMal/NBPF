@@ -1,4 +1,5 @@
 ﻿using NBPF.NBPFClasses;
+using NBPF.ViewModels;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,10 +15,19 @@ namespace NBPF
 {
     public partial class MainWindow : Window
     {
+        private VM_ContentManager _viewModel;
+
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.VM_ContentManager();
+            _viewModel = new VM_ContentManager();
+            this.DataContext = _viewModel;
+            BtnStartAnalysis.Click += new RoutedEventHandler(StartAnalysis_Clicked);
+        }
+
+        private void StartAnalysis_Clicked(object sender, RoutedEventArgs e)
+        {
+            _viewModel.StartAnalysis();
         }
     }
 }

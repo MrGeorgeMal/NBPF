@@ -1,4 +1,5 @@
-﻿using NBPF.NBPFClasses;
+﻿using NBPF.Calculation;
+using NBPF.NBPFClasses;
 using NBPF.Pages;
 using System.Diagnostics;
 using System.Windows;
@@ -66,6 +67,28 @@ namespace NBPF.ViewModels
         public void NBPFObject_ObjectUpdated(NBPFObject sender)
         {
             PageProperties.UpdateProperties(sender);
+        }
+        #endregion
+
+
+
+        #region Public Method
+        public void StartAnalysis()
+        {
+            NBPFClasses.StripStructure stripStructure = new NBPFClasses.StripStructure();
+            foreach(NBPFObject obj in _project.NBPFObjects)
+            {
+                if(obj is NBPFClasses.StripStructure)
+                {
+                    stripStructure = (NBPFClasses.StripStructure)obj;
+                    break;
+                }
+            }
+
+            if (stripStructure == null) { return; }
+
+            GridMethod gridMethod = new GridMethod(stripStructure.StripStucture.StripObjects);
+            gridMethod.SplitIntoAreas();
         }
         #endregion
     }
